@@ -1,17 +1,14 @@
 import { css } from '@emotion/react';
 import GlobalStyle from 'const/globalStyle';
-import { MouseEventHandler } from 'react';
+import { ButtonHTMLAttributes } from 'react';
 
-interface Props {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-  disabled?: boolean;
-  style?: React.CSSProperties;
 }
 
-export default function Button({ children, onClick, disabled, style }: Props) {
+export default function Button({ children, ...props }: Props) {
   return (
-    <button css={wrap} onClick={onClick} disabled={disabled} style={style}>
+    <button css={wrap} {...props}>
       {children}
     </button>
   );

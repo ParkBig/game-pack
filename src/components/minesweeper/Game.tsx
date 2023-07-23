@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
 import GameInfo from './GameInfo';
 import GlobalStyle from 'const/globalStyle';
-import GameZone from './GameZone';
+import GameButtons from './GameButtons';
 
 export default function Game() {
   return (
     <div css={wrap}>
       <div css={border}>
         <GameInfo />
-        <GameZone />
+        <GameButtons />
       </div>
     </div>
   );
