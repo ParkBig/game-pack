@@ -8,6 +8,8 @@ import { BlockInfo } from 'types/store/blocksStateType';
 
 interface Props {
   blockInfo: BlockInfo;
+  thisRow: number;
+  thisCol: number;
 }
 
 export default function GameButton({ blockInfo }: Props) {

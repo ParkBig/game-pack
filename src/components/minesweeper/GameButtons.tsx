@@ -14,7 +14,9 @@ export default function GameButtons() {
   return (
     <div css={wrap({ rows: rows, cols: cols })}>
       {blockInfoMatrix.map((blockInfoRow, rowIndex) =>
-        blockInfoRow.map((blockInfo, colIndex) => <GameButton key={`${rowIndex}-${colIndex}`} blockInfo={blockInfo} />)
+        blockInfoRow.map((blockInfo, colIndex) => (
+          <GameButton key={`${rowIndex}-${colIndex}`} blockInfo={blockInfo} thisRow={rowIndex} thisCol={colIndex} />
+        ))
       )}
     </div>
   );
