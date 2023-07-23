@@ -3,7 +3,7 @@ export interface BlocksInitialState {
   cols: number;
   numOfMines: number;
   gameMode: GameMode;
-  isGameEnd: boolean;
+  isGameProgress: boolean;
   blockInfoMatrix: BlockInfoRow[];
 }
 export type BlockInfoRow = BlockInfo[];

@@ -6,7 +6,7 @@ const initialState: BlocksInitialState = {
   cols: 8,
   numOfMines: 10,
   gameMode: 'Beginner',
-  isGameEnd: false,
+  isGameProgress: false,
   blockInfoMatrix: Array.from({ length: 8 }, () => Array.from({ length: 8 }, () => ({ isMine: false }))),
 };
 
@@ -15,7 +15,7 @@ const blocksState = createSlice({
   initialState: initialState,
   reducers: {
     initializeBlocks: state => {
-      state.isGameEnd = false;
+      state.isGameProgress = false;
       state.blockInfoMatrix = Array.from({ length: state.rows }, () =>
         Array.from({ length: state.cols }, () => ({ isMine: false }))
       );
@@ -30,14 +30,14 @@ const blocksState = createSlice({
         state.cols = action.payload.cols ? action.payload.cols : state.cols;
         state.numOfMines = action.payload.numOfMines;
         state.gameMode = action.payload.gameMode;
-        state.isGameEnd = false;
+        state.isGameProgress = false;
         state.blockInfoMatrix = Array.from({ length: state.rows }, () =>
           Array.from({ length: state.cols }, () => ({ isMine: false }))
         );
       }
     },
-    setIsGameEnd: state => {
-      state.isGameEnd = !state.isGameEnd;
+    setIsGameProgress: state => {
+      state.isGameProgress = !state.isGameProgress;
     },
     setBlocks: (state, action: PayloadAction<BlockInfoRow[]>) => {
       state.blockInfoMatrix = action.payload;
@@ -45,5 +45,5 @@ const blocksState = createSlice({
   },
 });
 
-export const { initializeBlocks, setRowsCols, setIsGameEnd, setBlocks } = blocksState.actions;
+export const { initializeBlocks, setRowsCols, setIsGameProgress, setBlocks } = blocksState.actions;
 export default blocksState;
