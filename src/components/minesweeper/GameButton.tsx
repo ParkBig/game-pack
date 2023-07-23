@@ -14,9 +14,12 @@ interface Props {
 
 export default function GameButton({ blockInfo, thisRow, thisCol }: Props) {
   const dispatch = useDispatch();
-  const { rows, cols, numOfMines, isGameProgress } = useSelector((state: RootState) => state.blocksState);
+  const { rows, cols, numOfMines, isGameProgress, blockInfoMatrix } = useSelector(
+    (state: RootState) => state.blocksState
+  );
 
-  const onMouseDown = () => {
+  const onMouseDownHandler = () => {
+    console.log(blockInfoMatrix);
     if (!isGameProgress) {
       const payload = generateRandomMines(rows, cols, numOfMines, [thisRow, thisCol]);
       dispatch(setBlocks(payload));
@@ -25,15 +28,20 @@ export default function GameButton({ blockInfo, thisRow, thisCol }: Props) {
     }
   };
 
-  const onMouseUp = () => {
+  const onClickHandler = () => {
     // 마인 판별 알고리즘 연결
-    // 타이머 시작
-    console.log('u');
+    // 타이머 시작 (시작 안했다면)
+    console.log('onClick');
+  };
+
+  const onRightMouseClickHandler = (ev: React.MouseEvent<HTMLButtonElement>) => {
+    ev.preventDefault();
+    console.log('오른쪽클릭');
   };
 
   return (
     <div css={btn}>
-      <Button onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
+      <Button onMouseDown={onMouseDownHandler} onClick={onClickHandler} onContextMenu={onRightMouseClickHandler}>
         {blockInfo.isMine}
       </Button>
     </div>
