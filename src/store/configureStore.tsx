@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import minesState from './modules/minesState';
+import blocksState from './modules/blocksState';
 
 const store = configureStore({
   reducer: {
-    minesState: minesState.reducer,
+    blocksState: blocksState.reducer,
   },
 });
 

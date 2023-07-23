@@ -1,8 +1,7 @@
 import { css } from '@emotion/react';
 import GlobalStyle from 'const/globalStyle';
 import SelectOption from './SelectOption';
-
-export type Options = 'New' | 'Beginner' | 'Intermediate' | 'Expert' | 'Custom';
+import { Options } from 'types/store/blocksStateType';
 
 const options: Options[] = ['New', 'Beginner', 'Intermediate', 'Expert', 'Custom'];
 
@@ -17,6 +16,8 @@ export default function GameModeSelector() {
 }
 
 const wrap = css`
+  display: flex;
+  flex-direction: column;
   background-color: ${GlobalStyle.colors.gray};
   border: 4px double gray;
   position: absolute;

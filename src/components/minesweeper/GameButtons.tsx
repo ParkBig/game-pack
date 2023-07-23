@@ -4,26 +4,25 @@ import GameButton from './GameButton';
 import { RootState } from 'store/configureStore';
 
 interface WrapProps {
-  row: number;
-  col: number;
+  rows: number;
+  cols: number;
 }
 
 export default function GameButtons() {
-  const mines = useSelector((state: RootState) => state.minesState);
-  console.log(mines);
-  const a = Array.from({ length: 64 }, (_, index) => index + 1);
+  const { rows, cols, blockInfoMatrix } = useSelector((state: RootState) => state.blocksState);
+
   return (
-    <div css={wrap({ row: 8, col: 8 })}>
-      {a.map(prop => (
-        <GameButton key={prop} testValue={prop} />
-      ))}
+    <div css={wrap({ rows: rows, cols: cols })}>
+      {blockInfoMatrix.map((blockInfoRow, rowIndex) =>
+        blockInfoRow.map((blockInfo, colIndex) => <GameButton key={`${rowIndex}-${colIndex}`} blockInfo={blockInfo} />)
+      )}
     </div>
   );
 }
 
 const wrap = (props: WrapProps) => css`
   display: grid;
-  grid-template-rows: repeat(${props.row}, 25px);
-  grid-template-columns: repeat(${props.col}, 25px);
+  grid-template-rows: repeat(${props.rows}, 25px);
+  grid-template-columns: repeat(${props.cols}, 25px);
   border: 4px inset;
 `;
