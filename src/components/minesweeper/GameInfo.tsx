@@ -1,11 +1,19 @@
 import { css } from '@emotion/react';
+import { useDispatch } from 'react-redux';
 import Button from 'components/ui/Button';
+import { initializeMines } from 'store/modules/minesState';
 
 export default function GameInfo() {
+  const dispatch = useDispatch();
+
+  const initialMinesHandler = () => {
+    dispatch(initializeMines());
+  };
+
   return (
     <div css={wrap}>
       <span>마인개수</span>
-      <div css={btn}>
+      <div css={btn} onClick={initialMinesHandler}>
         <Button style={{ fontSize: '2em' }}>😀</Button>
       </div>
       <span>진행시간</span>
