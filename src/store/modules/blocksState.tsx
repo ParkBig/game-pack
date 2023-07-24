@@ -21,20 +21,14 @@ const blocksState = createSlice({
       );
     },
     setRowsCols: (state, action: PayloadAction<SetRowColPayloadAction>) => {
-      if (!action.payload.rows && !action.payload.cols && action.payload.gameMode === 'Custom') {
-        // 나중에 조건으로 아예 못 입력하게 막아야함.
-        state.gameMode = action.payload.gameMode;
-        return;
-      } else {
-        state.rows = action.payload.rows ? action.payload.rows : state.rows;
-        state.cols = action.payload.cols ? action.payload.cols : state.cols;
-        state.numOfMines = action.payload.numOfMines;
-        state.gameMode = action.payload.gameMode;
-        state.isGameProgress = false;
-        state.blockInfoMatrix = Array.from({ length: state.rows }, () =>
-          Array.from({ length: state.cols }, () => ({ isMine: false }))
-        );
-      }
+      state.rows = action.payload.rows ? action.payload.rows : state.rows;
+      state.cols = action.payload.cols ? action.payload.cols : state.cols;
+      state.numOfMines = action.payload.numOfMines;
+      state.gameMode = action.payload.gameMode;
+      state.isGameProgress = false;
+      state.blockInfoMatrix = Array.from({ length: state.rows }, () =>
+        Array.from({ length: state.cols }, () => ({ isMine: false }))
+      );
     },
     setIsGameProgress: state => {
       state.isGameProgress = !state.isGameProgress;

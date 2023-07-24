@@ -1,13 +1,19 @@
 import { css } from '@emotion/react';
+import MineSVG from 'assets/svg/HeaderMine';
+import GlobalStyle from 'const/globalStyle';
 
 export default function Header() {
-  return <div css={wrap}>Minesweeper</div>;
+  return (
+    <div css={wrap}>
+      <MineSVG fill={GlobalStyle.colors.blue} />
+      Minesweeper
+    </div>
+  );
 }
 
 const wrap = css`
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   color: white;
   padding: 5px;

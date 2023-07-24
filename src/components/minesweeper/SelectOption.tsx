@@ -5,6 +5,7 @@ import CheckSVG from 'assets/svg/Check';
 import { css } from '@emotion/react';
 import { Options } from 'types/store/blocksStateType';
 import { sortingGameMode } from 'components/util/sortingGameMode';
+import { toggleCustomSettingModal } from 'store/modules/modalsState';
 
 interface WrapProps {
   new?: boolean;
@@ -25,7 +26,7 @@ export default function SelectOption({ optionValue }: Props) {
       return;
     }
     if (selectedValue === 'Custom') {
-      console.log('custom');
+      dispatch(toggleCustomSettingModal());
       return;
     } else {
       const payload = sortingGameMode(selectedValue);
