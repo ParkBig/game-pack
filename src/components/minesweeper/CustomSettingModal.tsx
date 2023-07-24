@@ -53,7 +53,7 @@ export default function CustomSettingModal() {
       <div css={setting}>
         <CustomInput ref={rowsInputRef} type="rows" placeholder="7<rows<50" />
         <CustomInput ref={colsInputRef} type="cols" placeholder="7<cols<50" />
-        <CustomInput ref={minesInputRef} type="mines" placeholder="1<mines<1000" />
+        <CustomInput ref={minesInputRef} type="mines" placeholder="0<mines<1000" />
       </div>
       <div css={btns}>
         <div css={btn} onClick={offModalHandler}>

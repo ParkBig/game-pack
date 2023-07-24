@@ -18,9 +18,12 @@ export const generateRandomMines = (
   }
 
   const board: BlockInfoRow[] = Array.from({ length: rows }, (_, rowIndex) =>
-    mineInfoRow
-      .slice(rowIndex * cols, (rowIndex + 1) * cols)
-      .map(mineInfo => ({ isMine: mineInfo, isClicked: false, value: null, isFlagged: false }))
+    mineInfoRow.slice(rowIndex * cols, (rowIndex + 1) * cols).map((mineInfo, colIndex) => ({
+      isMine: mineInfo,
+      isClicked: false,
+      value: countNearByMines(rows, cols, rowIndex, colIndex, mineInfoRow),
+      isFlagged: false,
+    }))
   );
 
   if (!board[excludeIndex[0]][excludeIndex[1]].isMine) {
@@ -49,4 +52,20 @@ const findFalseBlocks = (matrix: BlockInfoRow[]): Array<[number, number]> => {
 const getRandomBlock = (arr: Array<[number, number]>): [number, number] => {
   const randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex];
+};
+
+const countNearByMines = (rows: number, cols: number, rowIndex: number, colIndex: number, mineInfoRow: boolean[]) => {
+  let nearByMines = 0;
+  const dx = [-1, 0, 1, -1, 1, -1, 0, 1];
+  const dy = [-1, -1, -1, 0, 0, 1, 1, 1];
+
+  for (let i = 0; i < 8; i++) {
+    const targetRow = rowIndex + dx[i];
+    const targetCol = colIndex + dy[i];
+    if (targetRow > -1 && targetRow < rows && targetCol > -1 && targetCol < cols) {
+      mineInfoRow[targetRow * cols + targetCol] && nearByMines++;
+    }
+  }
+
+  return nearByMines ? nearByMines : null;
 };

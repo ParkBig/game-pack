@@ -16,7 +16,7 @@ export interface BlockInfo {
   isClicked: boolean;
   value: Value;
 }
-export type Value = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | null;
+export type Value = number | null;
 export type GameMode = 'Beginner' | 'Intermediate' | 'Expert' | 'Custom';
 export type Options = 'New' | GameMode;
 
