@@ -13,7 +13,7 @@ const changeIsClickStateToClickedWithDfs = (blockMatrixInfo: BlockInfoRow[], sta
   const rows = blockMatrixInfo.length;
   const cols = blockMatrixInfo[0].length;
   const newArr = blockMatrixInfo.map(row => [...row]);
-  console.log(stack, rows, cols, newArr);
+
   while (stack.length > 0) {
     const [row, col] = stack.pop()!;
 
@@ -21,19 +21,28 @@ const changeIsClickStateToClickedWithDfs = (blockMatrixInfo: BlockInfoRow[], sta
       row < 0 ||
       row >= rows ||
       col < 0 ||
-      col > cols ||
+      col >= cols ||
       newArr[row][col].isMine === true ||
       newArr[row][col].isClicked === true
     ) {
       continue;
     }
 
-    // newArr[row][col].isClicked = true;
-    // newArr[row][col].isFlagged = false;
+    newArr[row][col] = { ...newArr[row][col], isClicked: true, isFlagged: false };
 
-    // stack.push([row - 1, col]);
-    // stack.push([row + 1, col]);
-    // stack.push([row, col - 1]);
-    // stack.push([row, col + 1]);
+    if (newArr[row][col].value) {
+      continue;
+    }
+
+    stack.push([row - 1, col - 1]);
+    stack.push([row - 1, col]);
+    stack.push([row - 1, col + 1]);
+    stack.push([row, col - 1]);
+    stack.push([row, col + 1]);
+    stack.push([row + 1, col - 1]);
+    stack.push([row + 1, col]);
+    stack.push([row + 1, col + 1]);
   }
+
+  return newArr;
 };

@@ -11,7 +11,7 @@ import {
   setIsBlockClickPrevent,
   setIsGameProgress,
 } from 'store/modules/blocksState';
-import { BlockInfo, SetBlockIsFlaggedPayloadAction } from 'types/store/blocksStateType';
+import { BlockInfo, SetBlockIsFlaggedPayloadAction, SetBlocksPayloadAction } from 'types/store/blocksStateType';
 
 interface Props {
   blockInfo: BlockInfo;
@@ -27,7 +27,8 @@ export default function GameButton({ blockInfo, thisRow, thisCol }: Props) {
 
   const onMouseDownHandler = () => {
     if (!isGameProgress) {
-      const payload = generateRandomMines(rows, cols, numOfMines, [thisRow, thisCol]);
+      const setsBlockInfoMatrix = generateRandomMines(rows, cols, numOfMines, [thisRow, thisCol]);
+      const payload: SetBlocksPayloadAction = { isInitial: true, setsBlockInfoMatrix };
       dispatch(setBlocks(payload));
       dispatch(setIsGameProgress(true));
       return;
@@ -35,15 +36,15 @@ export default function GameButton({ blockInfo, thisRow, thisCol }: Props) {
   };
 
   const onClickHandler = () => {
-    // 마인 판별 알고리즘 연결(bfs)
     dispatch(setBlockIsClicked({ row: thisRow, col: thisCol }));
     if (blockInfo.isMine) {
       dispatch(setIsGameProgress(false));
       dispatch(setIsBlockClickPrevent(true));
       return;
     }
-    const a = propagationClickWithDfs(blockInfoMatrix, thisRow, thisCol);
-    console.log(a);
+    const propagatedBlockInfoMatrix = propagationClickWithDfs(blockInfoMatrix, thisRow, thisCol);
+    const payload: SetBlocksPayloadAction = { isInitial: false, setsBlockInfoMatrix: propagatedBlockInfoMatrix };
+    dispatch(setBlocks(payload));
   };
 
   const onRightMouseClickHandler = (ev: React.MouseEvent<HTMLButtonElement>) => {

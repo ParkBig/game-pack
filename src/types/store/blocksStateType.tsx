@@ -26,6 +26,10 @@ export interface SetRowColPayloadAction {
   gameMode: GameMode;
   numOfMines: number;
 }
+export interface SetBlocksPayloadAction {
+  setsBlockInfoMatrix: BlockInfoRow[];
+  isInitial: boolean;
+}
 export interface SetBlockIsClickedPayloadAction {
   row: number;
   col: number;

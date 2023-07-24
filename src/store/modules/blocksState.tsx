@@ -1,9 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import {
-  BlockInfoRow,
   BlocksInitialState,
   SetBlockIsClickedPayloadAction,
   SetBlockIsFlaggedPayloadAction,
+  SetBlocksPayloadAction,
   SetRowColPayloadAction,
 } from 'types/store/blocksStateType';
 
@@ -50,9 +50,11 @@ const blocksState = createSlice({
     setIsGameProgress: (state, action: PayloadAction<boolean>) => {
       state.isGameProgress = action.payload;
     },
-    setBlocks: (state, action: PayloadAction<BlockInfoRow[]>) => {
-      state.numOfFlagged = 0;
-      state.blockInfoMatrix = action.payload;
+    setBlocks: (state, action: PayloadAction<SetBlocksPayloadAction>) => {
+      if (action.payload.isInitial) {
+        state.numOfFlagged = 0;
+      }
+      state.blockInfoMatrix = action.payload.setsBlockInfoMatrix;
     },
     setBlockIsClicked: (state, action: PayloadAction<SetBlockIsClickedPayloadAction>) => {
       if (!state.isGameProgress) {
