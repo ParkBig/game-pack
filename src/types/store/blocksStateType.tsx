@@ -5,6 +5,7 @@ export interface BlocksInitialState {
   numOfFlagged: number;
   gameMode: GameMode;
   isGameProgress: boolean;
+  timer: number;
   isBlockClickPrevent: boolean;
   blockInfoMatrix: BlockInfoRow[];
 }

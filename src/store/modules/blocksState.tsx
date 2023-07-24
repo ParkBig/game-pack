@@ -14,6 +14,7 @@ const initialState: BlocksInitialState = {
   numOfFlagged: 0,
   gameMode: 'Beginner',
   isGameProgress: false,
+  timer: 0,
   isBlockClickPrevent: false,
   blockInfoMatrix: Array.from({ length: 8 }, () =>
     Array.from({ length: 8 }, () => ({ isMine: false, isClicked: false, value: null, isFlagged: false }))
@@ -28,6 +29,7 @@ const blocksState = createSlice({
       state.isGameProgress = false;
       state.isBlockClickPrevent = false;
       state.numOfFlagged = 0;
+      state.timer = 0;
       state.blockInfoMatrix = Array.from({ length: state.rows }, () =>
         Array.from({ length: state.cols }, () => ({ isMine: false, isClicked: false, value: null, isFlagged: false }))
       );
@@ -40,6 +42,7 @@ const blocksState = createSlice({
       state.gameMode = action.payload.gameMode;
       state.isGameProgress = false;
       state.isBlockClickPrevent = false;
+      state.timer = 0;
       state.blockInfoMatrix = Array.from({ length: state.rows }, () =>
         Array.from({ length: state.cols }, () => ({ isMine: false, isClicked: false, value: null, isFlagged: false }))
       );
@@ -80,6 +83,9 @@ const blocksState = createSlice({
         })
       );
     },
+    setTimer: state => {
+      state.timer++;
+    },
   },
 });
 
@@ -91,5 +97,6 @@ export const {
   setBlockIsClicked,
   setIsBlockClickPrevent,
   setBlockIsFlagged,
+  setTimer,
 } = blocksState.actions;
 export default blocksState;

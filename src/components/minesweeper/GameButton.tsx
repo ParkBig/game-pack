@@ -35,9 +35,9 @@ export default function GameButton({ blockInfo, thisRow, thisCol }: Props) {
 
   const onClickHandler = () => {
     // 마인 판별 알고리즘 연결(bfs)
-    // 타이머 시작 (시작 안했다면) 클릭여부 전역에 추가해야함
     dispatch(setBlockIsClicked({ row: thisRow, col: thisCol }));
     if (blockInfo.isMine) {
+      dispatch(setIsGameProgress(false));
       dispatch(setIsBlockClickPrevent(true));
     }
   };
