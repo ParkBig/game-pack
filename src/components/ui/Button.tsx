@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import FlagSVG from 'assets/svg/Flag';
 import MineSVG from 'assets/svg/Mine';
 import GlobalStyle from 'const/globalStyle';
 import { ButtonHTMLAttributes } from 'react';
@@ -19,11 +20,12 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export default function Button({ isClicked, blockInfo, ...props }: Props) {
   const isBlockClickPrevent = useSelector((state: RootState) => state.blocksState.isBlockClickPrevent);
-  const disabled = isBlockClickPrevent || isClicked ? true : false;
+  const disabled = isBlockClickPrevent || isClicked || blockInfo.isFlagged ? true : false;
   const sortValue = blockInfo.value === 'mine' ? <MineSVG fill="black" /> : blockInfo.value;
 
   return (
     <button css={wrap({ isClicked, isBlockClickPrevent, isMine: blockInfo.isMine })} {...props} disabled={disabled}>
+      {blockInfo.isFlagged && <FlagSVG />}
       {isClicked && sortValue}
     </button>
   );

@@ -13,6 +13,7 @@ export default function App() {
     <>
       <Global
         styles={css`
+          @import url('https://fonts.googleapis.com/css2?family=Wallpoet&display=swap');
           ${normalize}
           body {
             min-height: 100vh;

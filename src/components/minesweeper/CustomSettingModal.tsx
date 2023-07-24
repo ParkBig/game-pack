@@ -30,6 +30,9 @@ export default function CustomSettingModal() {
     if (rows < 7) {
       return alert('조건을 만족해주세요.');
     }
+    if (numOfMines > 999) {
+      return alert('조건을 만족해주세요.');
+    }
     if (numOfMines >= rows * cols) {
       return alert('지뢰의 개수는 블럭의 개수보다 크거나 같을수 없습니다.');
     }
@@ -50,7 +53,7 @@ export default function CustomSettingModal() {
       <div css={setting}>
         <CustomInput ref={rowsInputRef} type="rows" placeholder="7<rows<50" />
         <CustomInput ref={colsInputRef} type="cols" placeholder="7<cols<50" />
-        <CustomInput ref={minesInputRef} type="mines" placeholder="1<mines" />
+        <CustomInput ref={minesInputRef} type="mines" placeholder="1<mines<1000" />
       </div>
       <div css={btns}>
         <div css={btn} onClick={offModalHandler}>

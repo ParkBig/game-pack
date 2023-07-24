@@ -2,6 +2,7 @@ export interface BlocksInitialState {
   rows: number;
   cols: number;
   numOfMines: number;
+  numOfFlagged: number;
   gameMode: GameMode;
   isGameProgress: boolean;
   isBlockClickPrevent: boolean;
@@ -10,6 +11,7 @@ export interface BlocksInitialState {
 export type BlockInfoRow = BlockInfo[];
 export interface BlockInfo {
   isMine: boolean;
+  isFlagged: boolean;
   isClicked: boolean;
   value: Value;
 }
@@ -24,6 +26,10 @@ export interface SetRowColPayloadAction {
   numOfMines: number;
 }
 export interface SetBlockIsClickedPayloadAction {
+  row: number;
+  col: number;
+}
+export interface SetBlockIsFlaggedPayloadAction {
   row: number;
   col: number;
 }

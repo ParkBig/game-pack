@@ -1,10 +1,12 @@
 import { css } from '@emotion/react';
 import GlobalStyle from 'const/globalStyle';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'store/configureStore';
 import { initializeBlocks } from 'store/modules/blocksState';
 
 export default function GameInfo() {
   const dispatch = useDispatch();
+  const { numOfMines, numOfFlagged, isBlockClickPrevent } = useSelector((state: RootState) => state.blocksState);
 
   const initialMinesHandler = () => {
     dispatch(initializeBlocks());
@@ -12,11 +14,11 @@ export default function GameInfo() {
 
   return (
     <div css={wrap}>
-      <span>마인개수</span>
+      <div css={num}>{numOfMines - numOfFlagged}</div>
       <div css={upperBtn} onClick={initialMinesHandler}>
-        <button css={btn}>😀</button>
+        <button css={btn}>{isBlockClickPrevent ? '🥺' : '😀'}</button>
       </div>
-      <span>진행시간</span>
+      <div css={num}>진행시간</div>
     </div>
   );
 }
@@ -28,10 +30,22 @@ const wrap = css`
   align-items: center;
   padding: 5px;
   border: 4px inset;
+  text-align: center;
+`;
+const num = css`
+  width: 60px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px inset gray;
+  background-color: black;
+  color: red;
+  font-family: 'Wallpoet', cursive;
 `;
 const upperBtn = css`
-  height: 40px;
-  width: 40px;
+  height: 35px;
+  width: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
