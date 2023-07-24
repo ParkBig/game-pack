@@ -31,8 +31,12 @@ export const generateRandomMines = (
   } else {
     const falseBlocksIndexes = findFalseBlocks(board);
     const changeBlockIndex = getRandomBlock(falseBlocksIndexes);
+    const excludeIndexBlockValue = board[excludeIndex[0]][excludeIndex[1]].value;
+    const changeBlockValue = board[changeBlockIndex[0]][changeBlockIndex[1]].value;
     board[excludeIndex[0]][excludeIndex[1]].isMine = false;
+    board[excludeIndex[0]][excludeIndex[1]].value = changeBlockValue;
     board[changeBlockIndex[0]][changeBlockIndex[1]].isMine = true;
+    board[changeBlockIndex[0]][changeBlockIndex[1]].value = excludeIndexBlockValue;
 
     return board;
   }

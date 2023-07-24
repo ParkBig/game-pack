@@ -29,6 +29,7 @@ const changeIsClickStateToClickedWithDfs = (blockMatrixInfo: BlockInfoRow[], sta
     }
 
     // newArr[row][col].isClicked = true;
+    // newArr[row][col].isFlagged = false;
 
     // stack.push([row - 1, col]);
     // stack.push([row + 1, col]);
