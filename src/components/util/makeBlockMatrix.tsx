@@ -21,7 +21,7 @@ export const generateRandomMines = (
     mineInfoRow.slice(rowIndex * cols, (rowIndex + 1) * cols).map((mineInfo, colIndex) => ({
       isMine: mineInfo,
       isClicked: false,
-      value: countNearByMines(rows, cols, rowIndex, colIndex, mineInfoRow),
+      value: mineInfo ? null : countNearByMines(rows, cols, rowIndex, colIndex, mineInfoRow),
       isFlagged: false,
     }))
   );
@@ -56,14 +56,20 @@ const getRandomBlock = (arr: Array<[number, number]>): [number, number] => {
 
 const countNearByMines = (rows: number, cols: number, rowIndex: number, colIndex: number, mineInfoRow: boolean[]) => {
   let nearByMines = 0;
-  const dx = [-1, 0, 1, -1, 1, -1, 0, 1];
-  const dy = [-1, -1, -1, 0, 0, 1, 1, 1];
+  const dRow = [-1, -1, -1, 0, 0, 1, 1, 1];
+  const dCol = [-1, 0, 1, -1, 1, -1, 0, 1];
 
   for (let i = 0; i < 8; i++) {
-    const targetRow = rowIndex + dx[i];
-    const targetCol = colIndex + dy[i];
-    if (targetRow > -1 && targetRow < rows && targetCol > -1 && targetCol < cols) {
-      mineInfoRow[targetRow * cols + targetCol] && nearByMines++;
+    const targetRow = rowIndex + dRow[i];
+    const targetCol = colIndex + dCol[i];
+    if (
+      targetRow > -1 &&
+      targetRow < rows &&
+      targetCol > -1 &&
+      targetCol < cols &&
+      mineInfoRow[targetRow * cols + targetCol]
+    ) {
+      nearByMines++;
     }
   }
 

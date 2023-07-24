@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import Button from 'components/ui/Button';
 import { generateRandomMines } from 'components/util/makeBlockMatrix';
+import { propagationClickWithDfs } from 'components/util/propagationClickWithBfs';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/configureStore';
 import {
@@ -20,7 +21,7 @@ interface Props {
 
 export default function GameButton({ blockInfo, thisRow, thisCol }: Props) {
   const dispatch = useDispatch();
-  const { rows, cols, numOfMines, isGameProgress, isBlockClickPrevent } = useSelector(
+  const { rows, cols, numOfMines, isGameProgress, isBlockClickPrevent, blockInfoMatrix } = useSelector(
     (state: RootState) => state.blocksState
   );
 
@@ -39,7 +40,10 @@ export default function GameButton({ blockInfo, thisRow, thisCol }: Props) {
     if (blockInfo.isMine) {
       dispatch(setIsGameProgress(false));
       dispatch(setIsBlockClickPrevent(true));
+      return;
     }
+    const a = propagationClickWithDfs(blockInfoMatrix, thisRow, thisCol);
+    console.log(a);
   };
 
   const onRightMouseClickHandler = (ev: React.MouseEvent<HTMLButtonElement>) => {

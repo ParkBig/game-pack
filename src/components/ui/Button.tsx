@@ -23,7 +23,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 export default function Button({ isClicked, blockInfo, ...props }: Props) {
   const isBlockClickPrevent = useSelector((state: RootState) => state.blocksState.isBlockClickPrevent);
   const disabled = isBlockClickPrevent || isClicked || blockInfo.isFlagged ? true : false;
-  const sortValue = blockInfo.isMine ? <MineSVG fill="black" /> : blockInfo.value;
+  // const sortValue = blockInfo.isMine ? <MineSVG fill="black" /> : blockInfo.value;
   const sortedColor = sortColor(blockInfo.value);
 
   return (
@@ -33,7 +33,8 @@ export default function Button({ isClicked, blockInfo, ...props }: Props) {
       disabled={disabled}
     >
       {blockInfo.isFlagged && <FlagSVG />}
-      {isClicked && sortValue}
+      {isBlockClickPrevent && blockInfo.isMine && <MineSVG fill="black" />}
+      {isClicked && blockInfo.value}
     </button>
   );
 }
