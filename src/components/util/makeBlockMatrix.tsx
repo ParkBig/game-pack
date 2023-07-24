@@ -20,7 +20,7 @@ export const generateRandomMines = (
   const board: BlockInfoRow[] = Array.from({ length: rows }, (_, rowIndex) =>
     mineInfoRow
       .slice(rowIndex * cols, (rowIndex + 1) * cols)
-      .map(mineInfo => ({ isMine: mineInfo, isClicked: false, value: mineInfo ? 'mine' : null, isFlagged: false }))
+      .map(mineInfo => ({ isMine: mineInfo, isClicked: false, value: null, isFlagged: false }))
   );
 
   if (!board[excludeIndex[0]][excludeIndex[1]].isMine) {
@@ -29,9 +29,7 @@ export const generateRandomMines = (
     const falseBlocksIndexes = findFalseBlocks(board);
     const changeBlockIndex = getRandomBlock(falseBlocksIndexes);
     board[excludeIndex[0]][excludeIndex[1]].isMine = false;
-    board[excludeIndex[0]][excludeIndex[1]].value = null;
     board[changeBlockIndex[0]][changeBlockIndex[1]].isMine = true;
-    board[changeBlockIndex[0]][changeBlockIndex[1]].value = 'mine';
 
     return board;
   }

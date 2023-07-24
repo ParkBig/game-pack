@@ -21,12 +21,11 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 export default function Button({ isClicked, blockInfo, ...props }: Props) {
   const isBlockClickPrevent = useSelector((state: RootState) => state.blocksState.isBlockClickPrevent);
   const disabled = isBlockClickPrevent || isClicked || blockInfo.isFlagged ? true : false;
-  const sortValue = blockInfo.value === 'mine' ? <MineSVG fill="black" /> : blockInfo.value;
 
   return (
     <button css={wrap({ isClicked, isBlockClickPrevent, isMine: blockInfo.isMine })} {...props} disabled={disabled}>
       {blockInfo.isFlagged && <FlagSVG />}
-      {isClicked && sortValue}
+      {isClicked && blockInfo.isMine ? <MineSVG fill="black" /> : blockInfo.value}
     </button>
   );
 }
