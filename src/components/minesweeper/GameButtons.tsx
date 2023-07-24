@@ -10,7 +10,7 @@ interface WrapProps {
 
 export default function GameButtons() {
   const { rows, cols, blockInfoMatrix } = useSelector((state: RootState) => state.blocksState);
-
+  console.log(blockInfoMatrix);
   return (
     <div css={wrap({ rows: rows, cols: cols })}>
       {blockInfoMatrix.map((blockInfoRow, rowIndex) =>

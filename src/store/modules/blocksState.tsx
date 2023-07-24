@@ -26,7 +26,7 @@ const blocksState = createSlice({
       state.isGameProgress = false;
       state.isBlockClickPrevent = false;
       state.blockInfoMatrix = Array.from({ length: state.rows }, () =>
-        Array.from({ length: 8 }, () => ({ isMine: false, isClicked: false, value: null }))
+        Array.from({ length: state.cols }, () => ({ isMine: false, isClicked: false, value: null }))
       );
     },
     setRowsCols: (state, action: PayloadAction<SetRowColPayloadAction>) => {
@@ -37,7 +37,7 @@ const blocksState = createSlice({
       state.isGameProgress = false;
       state.isBlockClickPrevent = false;
       state.blockInfoMatrix = Array.from({ length: state.rows }, () =>
-        Array.from({ length: 8 }, () => ({ isMine: false, isClicked: false, value: null }))
+        Array.from({ length: state.cols }, () => ({ isMine: false, isClicked: false, value: null }))
       );
     },
     setIsGameProgress: (state, action: PayloadAction<boolean>) => {
