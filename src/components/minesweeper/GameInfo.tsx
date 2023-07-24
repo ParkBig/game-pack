@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
+import GlobalStyle from 'const/globalStyle';
 import { useDispatch } from 'react-redux';
-import Button from 'components/ui/Button';
 import { initializeBlocks } from 'store/modules/blocksState';
 
 export default function GameInfo() {
@@ -13,8 +13,8 @@ export default function GameInfo() {
   return (
     <div css={wrap}>
       <span>마인개수</span>
-      <div css={btn} onClick={initialMinesHandler}>
-        <Button style={{ fontSize: '2em' }}>😀</Button>
+      <div css={upperBtn} onClick={initialMinesHandler}>
+        <button css={btn}>😀</button>
       </div>
       <span>진행시간</span>
     </div>
@@ -29,11 +29,26 @@ const wrap = css`
   padding: 5px;
   border: 4px inset;
 `;
-const btn = css`
+const upperBtn = css`
   height: 40px;
   width: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid gray;
+`;
+const btn = css`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px outset;
+  padding: 0;
+  background-color: ${GlobalStyle.colors.gray};
+  font-size: 30px;
+
+  :active {
+    border: 3px inset;
+  }
 `;

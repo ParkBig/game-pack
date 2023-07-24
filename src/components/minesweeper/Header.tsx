@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import MineSVG from 'assets/svg/HeaderMine';
+import MineSVG from 'assets/svg/Mine';
 import GlobalStyle from 'const/globalStyle';
 
 export default function Header() {

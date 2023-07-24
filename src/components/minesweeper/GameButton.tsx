@@ -3,7 +3,7 @@ import Button from 'components/ui/Button';
 import { generateRandomMines } from 'components/util/makeBlockMatrix';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/configureStore';
-import { setBlocks, setIsGameProgress } from 'store/modules/blocksState';
+import { setBlockIsClicked, setBlocks, setIsBlockClickPrevent, setIsGameProgress } from 'store/modules/blocksState';
 import { BlockInfo } from 'types/store/blocksStateType';
 
 interface Props {
@@ -20,7 +20,7 @@ export default function GameButton({ blockInfo, thisRow, thisCol }: Props) {
     if (!isGameProgress) {
       const payload = generateRandomMines(rows, cols, numOfMines, [thisRow, thisCol]);
       dispatch(setBlocks(payload));
-      dispatch(setIsGameProgress());
+      dispatch(setIsGameProgress(true));
       return;
     }
   };
@@ -28,8 +28,10 @@ export default function GameButton({ blockInfo, thisRow, thisCol }: Props) {
   const onClickHandler = () => {
     // 마인 판별 알고리즘 연결(bfs)
     // 타이머 시작 (시작 안했다면) 클릭여부 전역에 추가해야함
+    dispatch(setBlockIsClicked({ row: thisRow, col: thisCol }));
     if (blockInfo.isMine) {
-      // 게임종료 , 게임이 종료되면 모든 버튼들이 클릭이 불가능해져야함
+      console.log('hi');
+      dispatch(setIsBlockClickPrevent(true));
     }
   };
 
@@ -40,9 +42,13 @@ export default function GameButton({ blockInfo, thisRow, thisCol }: Props) {
 
   return (
     <div css={btn}>
-      <Button onMouseDown={onMouseDownHandler} onClick={onClickHandler} onContextMenu={onRightMouseClickHandler}>
-        {blockInfo.value}
-      </Button>
+      <Button
+        isClicked={blockInfo.isClicked}
+        blockInfo={blockInfo}
+        onMouseDown={onMouseDownHandler}
+        onClick={onClickHandler}
+        onContextMenu={onRightMouseClickHandler}
+      />
     </div>
   );
 }

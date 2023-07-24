@@ -18,16 +18,20 @@ export const generateRandomMines = (
   }
 
   const board: BlockInfoRow[] = Array.from({ length: rows }, (_, rowIndex) =>
-    mineInfoRow.slice(rowIndex * cols, (rowIndex + 1) * cols).map(mineInfo => ({ isMine: mineInfo }))
+    mineInfoRow
+      .slice(rowIndex * cols, (rowIndex + 1) * cols)
+      .map(mineInfo => ({ isMine: mineInfo, isClicked: false, value: mineInfo ? 'mine' : null }))
   );
 
   if (!board[excludeIndex[0]][excludeIndex[1]].isMine) {
     return board;
   } else {
     const falseBlocksIndexes = findFalseBlocks(board);
-    const changeBlockIndex = getRandomBlocks(falseBlocksIndexes);
+    const changeBlockIndex = getRandomBlock(falseBlocksIndexes);
     board[excludeIndex[0]][excludeIndex[1]].isMine = false;
+    board[excludeIndex[0]][excludeIndex[1]].value = null;
     board[changeBlockIndex[0]][changeBlockIndex[1]].isMine = true;
+    board[changeBlockIndex[0]][changeBlockIndex[1]].value = 'mine';
 
     return board;
   }
@@ -44,7 +48,7 @@ const findFalseBlocks = (matrix: BlockInfoRow[]): Array<[number, number]> => {
   }, []);
 };
 
-const getRandomBlocks = (arr: Array<[number, number]>): [number, number] => {
+const getRandomBlock = (arr: Array<[number, number]>): [number, number] => {
   const randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex];
 };
