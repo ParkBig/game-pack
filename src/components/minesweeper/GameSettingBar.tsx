@@ -5,7 +5,7 @@ import GameModeSelector from './GameModeSelector';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/configureStore';
 
-export default function SettingBar() {
+export default function GameSettingBar() {
   const isCustomSettingOpen = useSelector((state: RootState) => state.modalsState.isCustomSettingOpen);
   const [isSelectOpen, setIsSelectOpen] = useState(false);
 

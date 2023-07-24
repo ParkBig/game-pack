@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import GameInfo from './GameInfo';
+import GameInfoBar from './GameInfoBar';
 import GlobalStyle from 'const/globalStyle';
 import GameButtons from './GameButtons';
 
@@ -7,7 +7,7 @@ export default function Game() {
   return (
     <div css={wrap}>
       <div css={border}>
-        <GameInfo />
+        <GameInfoBar />
         <GameButtons />
       </div>
     </div>

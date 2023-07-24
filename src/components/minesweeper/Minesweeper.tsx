@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
 import GlobalStyle from 'const/globalStyle';
 import Header from './Header';
-import SettingBar from './SettingBar';
+import GameSettingBar from './GameSettingBar';
 import Game from './Game';
 
 export default function Minesweeper() {
   return (
     <main css={wrap}>
       <Header />
-      <SettingBar />
+      <GameSettingBar />
       <Game />
     </main>
   );

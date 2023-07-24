@@ -3,7 +3,7 @@ import Timer from './Timer';
 import NumOfMines from './NumOfMines';
 import ResetBtn from './ResetBtn';
 
-export default function GameInfo() {
+export default function GameInfoBar() {
   return (
     <div css={wrap}>
       <NumOfMines />
