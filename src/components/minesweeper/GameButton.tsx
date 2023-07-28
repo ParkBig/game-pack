@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import Button from 'components/ui/Button';
 import { generateRandomMines } from 'components/util/makeBlockMatrix';
-import { propagationClickWithDfs } from 'components/util/propagationClickWithBfs';
+import { propagationClickWithDfs } from 'components/util/propagationClickWithDfs';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/configureStore';
 import {
