@@ -26,18 +26,20 @@ export const generateRandomMines = (
     }))
   );
 
+  console.log(board);
+
   if (!board[excludeIndex[0]][excludeIndex[1]].isMine) {
+    console.log(board, 'not');
     return board;
   } else {
+    /** 버그 발견!
+     * 현재 당사자끼리의 정보만 바꾸는데, 잘못됨.
+     * 바뀌게되면 원천블락을 둘러싼 주변 블락들의 지뢰카운트를 하나찍줄여주고,
+     * 바꿀 블락의 주변 블락들의 지뢰카운트를 늘려줘야한다.
+     */
     const falseBlocksIndexes = findFalseBlocks(board);
     const changeBlockIndex = getRandomBlock(falseBlocksIndexes);
-    const excludeIndexBlockValue = board[excludeIndex[0]][excludeIndex[1]].value;
-    const changeBlockValue = board[changeBlockIndex[0]][changeBlockIndex[1]].value;
-    board[excludeIndex[0]][excludeIndex[1]].isMine = false;
-    board[excludeIndex[0]][excludeIndex[1]].value = changeBlockValue;
-    board[changeBlockIndex[0]][changeBlockIndex[1]].isMine = true;
-    board[changeBlockIndex[0]][changeBlockIndex[1]].value = excludeIndexBlockValue;
-
+    exchangeBlockInfo(board, excludeIndex, changeBlockIndex);
     return board;
   }
 };
@@ -78,4 +80,53 @@ const countNearByMines = (rows: number, cols: number, rowIndex: number, colIndex
   }
 
   return nearByMines ? nearByMines : null;
+};
+
+const exchangeBlockInfo = (board: BlockInfoRow[], source: [number, number], target: [number, number]) => {
+  const rows = board.length;
+  const cols = board[0].length;
+  const [sourceRow, sourceCol] = source;
+  const [targetRow, targetCol] = target;
+  const dRow = [-1, -1, -1, 0, 0, 1, 1, 1];
+  const dCol = [-1, 0, 1, -1, 1, -1, 0, 1];
+
+  for (let i = 0; i < 8; i++) {
+    const [exchangeNearBySourceBlockRow, exchangeNearBySourceBlockCol] = [sourceRow + dRow[i], sourceCol + dCol[i]];
+    const [exchangeNearByTargetBlockRow, exchangeNearByTargetBlockCol] = [targetRow + dRow[i], targetCol + dCol[i]];
+
+    if (
+      exchangeNearBySourceBlockRow > -1 &&
+      exchangeNearBySourceBlockRow < rows &&
+      exchangeNearBySourceBlockCol > -1 &&
+      exchangeNearBySourceBlockCol < cols
+    ) {
+      const exchangeNearBySourceBlockValue = board[exchangeNearBySourceBlockRow][exchangeNearBySourceBlockCol].value;
+      if (exchangeNearBySourceBlockValue) {
+        if (exchangeNearBySourceBlockValue === 1) {
+          board[exchangeNearBySourceBlockRow][exchangeNearBySourceBlockCol].value = null;
+        } else {
+          board[exchangeNearBySourceBlockRow][exchangeNearBySourceBlockCol].value = exchangeNearBySourceBlockValue - 1;
+        }
+      }
+    }
+    if (
+      exchangeNearByTargetBlockRow > -1 &&
+      exchangeNearByTargetBlockRow < rows &&
+      exchangeNearByTargetBlockCol > -1 &&
+      exchangeNearByTargetBlockCol < cols
+    ) {
+      const exchangeNearByTargetBlockValue = board[exchangeNearByTargetBlockRow][exchangeNearByTargetBlockCol].value;
+      if (exchangeNearByTargetBlockValue) {
+        board[exchangeNearByTargetBlockRow][exchangeNearByTargetBlockCol].value = exchangeNearByTargetBlockValue + 1;
+      } else {
+        board[exchangeNearByTargetBlockRow][exchangeNearByTargetBlockCol].value = 1;
+      }
+    }
+  }
+
+  const sourceBlock = board[sourceRow][sourceCol];
+  const targetBlock = board[targetRow][targetCol];
+
+  board[sourceRow][sourceCol] = { ...sourceBlock, value: targetBlock.value, isMine: false };
+  board[targetRow][targetCol] = { ...targetBlock, value: sourceBlock.value, isMine: true };
 };
