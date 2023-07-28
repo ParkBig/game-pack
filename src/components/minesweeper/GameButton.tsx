@@ -49,7 +49,7 @@ export default function GameButton({ blockInfo, thisRow, thisCol }: Props) {
 
   const onRightMouseClickHandler = (ev: React.MouseEvent<HTMLButtonElement>) => {
     ev.preventDefault();
-    if (isBlockClickPrevent) {
+    if (isBlockClickPrevent || blockInfo.isClicked) {
       return;
     }
     const payload: SetBlockIsFlaggedPayloadAction = { row: thisRow, col: thisCol };
