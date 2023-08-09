@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { useEffect, useRef } from 'react';
-import useBlocksState from 'store/useBLocksState';
+import useMinesweeperState from 'store/useMinesweeperState';
 
 export default function Timer() {
-  const { timer, isGameProgress, setTimer } = useBlocksState();
+  const { timer, isGameProgress, setTimer } = useMinesweeperState();
   const interval = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {

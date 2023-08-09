@@ -16,7 +16,7 @@ export default function GameSettingBar() {
   };
 
   return (
-    <div css={wrap}>
+    <div css={wrap} className="non-draggable">
       <div css={toggleSelect}>
         <div onClick={toggleSelectOpenHandler}>
           <span>Game</span>
@@ -26,10 +26,10 @@ export default function GameSettingBar() {
       <div
         css={toggleSelect}
         onClick={() => {
-          window.alert('구현할 요구기능이 없습니다.');
+          window.alert('화이띵!');
         }}
       >
-        <span>Option</span>
+        <span>Help</span>
       </div>
     </div>
   );

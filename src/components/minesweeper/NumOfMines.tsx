@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import useBlocksState from 'store/useBLocksState';
+import useMinesweeperState from 'store/useMinesweeperState';
 
 export default function NumOfMines() {
-  const { numOfMines, numOfFlagged } = useBlocksState();
+  const { numOfMines, numOfFlagged } = useMinesweeperState();
 
   return (
     <div css={wrap}>

@@ -1,4 +1,5 @@
-export interface UseBlocksState {
+export interface UseMinesweeperState {
+  isOpenMinesweeper: boolean;
   rows: number;
   cols: number;
   numOfMines: number;
@@ -8,6 +9,7 @@ export interface UseBlocksState {
   timer: number;
   isBlockClickPrevent: boolean;
   blockInfoMatrix: BlockInfoRow[];
+  toggleIsOpenMinesweeper: () => void;
   initializeBlocks: () => void;
   setRowsCols: (setRowsColPayload: SetRowColPayload) => void;
   setIsGameProgress: (setIsGameProgressPayload: boolean) => void;

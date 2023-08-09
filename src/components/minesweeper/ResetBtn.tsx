@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import GlobalStyle from 'const/globalStyle';
-import useBlocksState from 'store/useBLocksState';
+import useMinesweeperState from 'store/useMinesweeperState';
 
 export default function ResetBtn() {
-  const { isBlockClickPrevent, initializeBlocks } = useBlocksState();
+  const { isBlockClickPrevent, initializeBlocks } = useMinesweeperState();
 
   const initialMinesHandler = () => {
     initializeBlocks();

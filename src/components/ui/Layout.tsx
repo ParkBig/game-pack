@@ -14,11 +14,6 @@ export default function Layout(props: Props) {
           @import url('https://fonts.googleapis.com/css2?family=Wallpoet&display=swap');
           ${normalize}
           body {
-            min-height: 100vh;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             background-image: url(${GlobalStyle.backgroundImageUrl});
             background-size: cover;
             background-position: center;

@@ -4,8 +4,8 @@ import MineSVG from 'assets/svg/Mine';
 import { sortColor } from 'util/sortColor';
 import GlobalStyle from 'const/globalStyle';
 import { ButtonHTMLAttributes } from 'react';
-import useBlocksState from 'store/useBLocksState';
-import { BlockInfo } from 'types/store/UseBlocksState';
+import useMinesweeperState from 'store/useMinesweeperState';
+import { BlockInfo } from 'types/store/useMinesweeperStateTypes';
 
 interface WrapProps {
   isClicked: boolean;
@@ -20,7 +20,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export default function Button({ isClicked, blockInfo, ...props }: Props) {
-  const { isBlockClickPrevent } = useBlocksState();
+  const { isBlockClickPrevent } = useMinesweeperState();
   const disabled = isBlockClickPrevent || isClicked || blockInfo.isFlagged ? true : false;
   const sortedColor = sortColor(blockInfo.value);
 
@@ -31,8 +31,8 @@ export default function Button({ isClicked, blockInfo, ...props }: Props) {
       disabled={disabled}
     >
       {blockInfo.isFlagged && <FlagSVG />}
-      {isBlockClickPrevent && blockInfo.isMine && <MineSVG fill="black" />}
-      {isClicked && blockInfo.value}
+      {isBlockClickPrevent && blockInfo.isMine && <MineSVG fill="black" width="20" height="20" />}
+      {isClicked && !blockInfo.isMine && blockInfo.value}
     </button>
   );
 }

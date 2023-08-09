@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import GlobalStyle from 'const/globalStyle';
 import SelectOption from './SelectOption';
-import { Options } from 'types/store/UseBlocksState';
+import { Options } from 'types/store/useMinesweeperStateTypes';
 
 const options: Options[] = ['New', 'Beginner', 'Intermediate', 'Expert', 'Custom'];
 

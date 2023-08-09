@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import GameButton from './GameButton';
-import useBlocksState from 'store/useBLocksState';
+import useMinesweeperState from 'store/useMinesweeperState';
 
 interface WrapProps {
   rows: number;
@@ -8,7 +8,7 @@ interface WrapProps {
 }
 
 export default function GameButtons() {
-  const { rows, cols, blockInfoMatrix } = useBlocksState();
+  const { rows, cols, blockInfoMatrix } = useMinesweeperState();
 
   return (
     <div css={wrap({ rows: rows, cols: cols })}>

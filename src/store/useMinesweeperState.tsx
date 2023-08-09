@@ -1,9 +1,10 @@
-import { UseBlocksState } from 'types/store/UseBlocksState';
+import { UseMinesweeperState } from 'types/store/useMinesweeperStateTypes';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
-const useBlocksState = create(
-  immer<UseBlocksState>(set => ({
+const useMinesweeperState = create(
+  immer<UseMinesweeperState>(set => ({
+    isOpenMinesweeper: true,
     rows: 8,
     cols: 8,
     numOfMines: 10,
@@ -15,6 +16,23 @@ const useBlocksState = create(
     blockInfoMatrix: Array.from({ length: 8 }, () =>
       Array.from({ length: 8 }, () => ({ isMine: false, isClicked: false, value: null, isFlagged: false }))
     ),
+    toggleIsOpenMinesweeper: () =>
+      set(state => {
+        if (state.isOpenMinesweeper) {
+          state.rows = 8;
+          state.cols = 8;
+          state.numOfMines = 10;
+          state.numOfFlagged = 0;
+          state.gameMode = 'Beginner';
+          state.isGameProgress = false;
+          state.timer = 0;
+          state.isBlockClickPrevent = false;
+          state.blockInfoMatrix = Array.from({ length: 8 }, () =>
+            Array.from({ length: 8 }, () => ({ isMine: false, isClicked: false, value: null, isFlagged: false }))
+          );
+        }
+        state.isOpenMinesweeper = !state.isOpenMinesweeper;
+      }),
     initializeBlocks: () =>
       set(state => {
         state.isGameProgress = false;
@@ -89,4 +107,4 @@ const useBlocksState = create(
   }))
 );
 
-export default useBlocksState;
+export default useMinesweeperState;

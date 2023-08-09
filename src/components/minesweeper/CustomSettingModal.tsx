@@ -4,11 +4,11 @@ import ReactDOM from 'react-dom';
 import CustomInput from './CustomInput';
 import { useRef } from 'react';
 import useModalState from 'store/useModalState';
-import useBlocksState from 'store/useBLocksState';
-import { SetRowColPayload } from 'types/store/UseBlocksState';
+import useMinesweeperState from 'store/useMinesweeperState';
+import { SetRowColPayload } from 'types/store/useMinesweeperStateTypes';
 
 export default function CustomSettingModal() {
-  const { setRowsCols } = useBlocksState();
+  const { setRowsCols } = useMinesweeperState();
   const { toggleCustomSettingModal } = useModalState();
   const rowsInputRef = useRef<HTMLInputElement>(null);
   const colsInputRef = useRef<HTMLInputElement>(null);
@@ -30,7 +30,13 @@ export default function CustomSettingModal() {
     if (rows < 7) {
       return alert('조건을 만족해주세요.');
     }
-    if (numOfMines > 999) {
+    if (rows > 31) {
+      return alert('조건을 만족해주세요.');
+    }
+    if (cols < 7) {
+      return alert('조건을 만족해주세요.');
+    }
+    if (cols > 31) {
       return alert('조건을 만족해주세요.');
     }
     if (numOfMines >= rows * cols) {
@@ -51,9 +57,9 @@ export default function CustomSettingModal() {
     <div css={wrap}>
       <div css={title}>Custom Setting</div>
       <div css={setting}>
-        <CustomInput ref={rowsInputRef} type="rows" placeholder="7<rows<50" />
-        <CustomInput ref={colsInputRef} type="cols" placeholder="7<cols<50" />
-        <CustomInput ref={minesInputRef} type="mines" placeholder="0<mines<1000" />
+        <CustomInput ref={rowsInputRef} type="rows" placeholder="6<rows<31" />
+        <CustomInput ref={colsInputRef} type="cols" placeholder="6<cols<31" />
+        <CustomInput ref={minesInputRef} type="mines" placeholder="mine<blocks" />
       </div>
       <div css={btns}>
         <div css={btn} onClick={offModalHandler}>

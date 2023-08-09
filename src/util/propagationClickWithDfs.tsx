@@ -1,10 +1,6 @@
-import { BlockInfoRow } from 'types/store/UseBlocksState';
+import { BlockInfoRow } from 'types/store/useMinesweeperStateTypes';
 
 export const propagationClickWithDfs = (blockMatrixInfo: BlockInfoRow[], startRow: number, startCol: number) => {
-  return changeIsClickStateToClickedWithDfs(blockMatrixInfo, startRow, startCol);
-};
-
-const changeIsClickStateToClickedWithDfs = (blockMatrixInfo: BlockInfoRow[], startRow: number, startCol: number) => {
   const stack = [[startRow, startCol]];
   const rows = blockMatrixInfo.length;
   const cols = blockMatrixInfo[0].length;

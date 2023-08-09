@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import Button from 'components/ui/Button';
 import { generateRandomMines } from 'util/makeBlockMatrix';
 import { propagationClickWithDfs } from 'util/propagationClickWithDfs';
-import useBlocksState from 'store/useBLocksState';
-import { BlockInfo, SetBlockIsFlaggedPayload, SetBlocksPayload } from 'types/store/UseBlocksState';
+import useMinesweeperState from 'store/useMinesweeperState';
+import { BlockInfo, SetBlockIsFlaggedPayload, SetBlocksPayload } from 'types/store/useMinesweeperStateTypes';
 
 interface Props {
   blockInfo: BlockInfo;
@@ -24,7 +24,7 @@ export default function GameButton({ blockInfo, thisRow, thisCol }: Props) {
     setBlockIsClicked,
     setIsBlockClickPrevent,
     setBlockIsFlagged,
-  } = useBlocksState();
+  } = useMinesweeperState();
 
   const onMouseDownHandler = () => {
     if (!isGameProgress) {

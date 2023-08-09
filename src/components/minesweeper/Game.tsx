@@ -5,7 +5,7 @@ import GameButtons from './GameButtons';
 
 export default function Game() {
   return (
-    <div css={wrap}>
+    <div css={wrap} className="non-draggable">
       <div css={border}>
         <GameInfoBar />
         <GameButtons />
