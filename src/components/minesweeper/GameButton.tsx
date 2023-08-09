@@ -1,17 +1,9 @@
 import { css } from '@emotion/react';
 import Button from 'components/ui/Button';
-import { generateRandomMines } from 'components/util/makeBlockMatrix';
-import { propagationClickWithDfs } from 'components/util/propagationClickWithDfs';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'store/configureStore';
-import {
-  setBlockIsClicked,
-  setBlockIsFlagged,
-  setBlocks,
-  setIsBlockClickPrevent,
-  setIsGameProgress,
-} from 'store/modules/blocksState';
-import { BlockInfo, SetBlockIsFlaggedPayloadAction, SetBlocksPayloadAction } from 'types/store/blocksStateType';
+import { generateRandomMines } from 'util/makeBlockMatrix';
+import { propagationClickWithDfs } from 'util/propagationClickWithDfs';
+import useBlocksState from 'store/useBLocksState';
+import { BlockInfo, SetBlockIsFlaggedPayload, SetBlocksPayload } from 'types/store/UseBlocksState';
 
 interface Props {
   blockInfo: BlockInfo;
@@ -20,31 +12,40 @@ interface Props {
 }
 
 export default function GameButton({ blockInfo, thisRow, thisCol }: Props) {
-  const dispatch = useDispatch();
-  const { rows, cols, numOfMines, isGameProgress, isBlockClickPrevent, blockInfoMatrix } = useSelector(
-    (state: RootState) => state.blocksState
-  );
+  const {
+    rows,
+    cols,
+    numOfMines,
+    isGameProgress,
+    isBlockClickPrevent,
+    blockInfoMatrix,
+    setBlocks,
+    setIsGameProgress,
+    setBlockIsClicked,
+    setIsBlockClickPrevent,
+    setBlockIsFlagged,
+  } = useBlocksState();
 
   const onMouseDownHandler = () => {
     if (!isGameProgress) {
       const setsBlockInfoMatrix = generateRandomMines(rows, cols, numOfMines, [thisRow, thisCol]);
-      const payload: SetBlocksPayloadAction = { isInitial: true, setsBlockInfoMatrix };
-      dispatch(setBlocks(payload));
-      dispatch(setIsGameProgress(true));
+      const payload: SetBlocksPayload = { isInitial: true, setsBlockInfoMatrix };
+      setBlocks(payload);
+      setIsGameProgress(true);
       return;
     }
   };
 
   const onClickHandler = () => {
-    dispatch(setBlockIsClicked({ row: thisRow, col: thisCol }));
+    setBlockIsClicked({ row: thisRow, col: thisCol });
     if (blockInfo.isMine) {
-      dispatch(setIsGameProgress(false));
-      dispatch(setIsBlockClickPrevent(true));
+      setIsGameProgress(false);
+      setIsBlockClickPrevent(true);
       return;
     }
     const propagatedBlockInfoMatrix = propagationClickWithDfs(blockInfoMatrix, thisRow, thisCol);
-    const payload: SetBlocksPayloadAction = { isInitial: false, setsBlockInfoMatrix: propagatedBlockInfoMatrix };
-    dispatch(setBlocks(payload));
+    const payload: SetBlocksPayload = { isInitial: false, setsBlockInfoMatrix: propagatedBlockInfoMatrix };
+    setBlocks(payload);
   };
 
   const onRightMouseClickHandler = (ev: React.MouseEvent<HTMLButtonElement>) => {
@@ -52,8 +53,8 @@ export default function GameButton({ blockInfo, thisRow, thisCol }: Props) {
     if (isBlockClickPrevent || blockInfo.isClicked) {
       return;
     }
-    const payload: SetBlockIsFlaggedPayloadAction = { row: thisRow, col: thisCol };
-    dispatch(setBlockIsFlagged(payload));
+    const payload: SetBlockIsFlaggedPayload = { row: thisRow, col: thisCol };
+    setBlockIsFlagged(payload);
   };
 
   return (

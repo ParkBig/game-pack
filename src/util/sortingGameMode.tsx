@@ -1,8 +1,8 @@
-import { SetRowColPayloadAction } from 'types/store/blocksStateType';
+import { SetRowColPayload } from 'types/store/UseBlocksState';
 
 export type SettingType = 'Beginner' | 'Intermediate' | 'Expert';
 
-export const sortingGameMode = (settingType: SettingType): SetRowColPayloadAction => {
+export const sortingGameMode = (settingType: SettingType): SetRowColPayload => {
   if (settingType === 'Beginner') {
     return { rows: 8, cols: 8, gameMode: 'Beginner', numOfMines: 10 };
   }

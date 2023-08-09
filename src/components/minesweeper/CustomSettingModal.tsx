@@ -1,21 +1,21 @@
 import { css } from '@emotion/react';
 import GlobalStyle from 'const/globalStyle';
 import ReactDOM from 'react-dom';
-import { useDispatch } from 'react-redux';
-import { toggleCustomSettingModal } from 'store/modules/modalsState';
 import CustomInput from './CustomInput';
 import { useRef } from 'react';
-import { setRowsCols } from 'store/modules/blocksState';
-import { SetRowColPayloadAction } from 'types/store/blocksStateType';
+import useModalState from 'store/useModalState';
+import useBlocksState from 'store/useBLocksState';
+import { SetRowColPayload } from 'types/store/UseBlocksState';
 
 export default function CustomSettingModal() {
-  const dispatch = useDispatch();
+  const { setRowsCols } = useBlocksState();
+  const { toggleCustomSettingModal } = useModalState();
   const rowsInputRef = useRef<HTMLInputElement>(null);
   const colsInputRef = useRef<HTMLInputElement>(null);
   const minesInputRef = useRef<HTMLInputElement>(null);
 
   const offModalHandler = () => {
-    dispatch(toggleCustomSettingModal());
+    toggleCustomSettingModal();
   };
 
   const confirmSettingHandler = () => {
@@ -37,14 +37,14 @@ export default function CustomSettingModal() {
       return alert('지뢰의 개수는 블럭의 개수보다 크거나 같을수 없습니다.');
     }
 
-    const payload: SetRowColPayloadAction = {
+    const payload: SetRowColPayload = {
       rows,
       cols,
       numOfMines,
       gameMode: 'Custom',
     };
-    dispatch(setRowsCols(payload));
-    dispatch(toggleCustomSettingModal());
+    setRowsCols(payload);
+    toggleCustomSettingModal();
   };
 
   return ReactDOM.createPortal(

@@ -1,9 +1,5 @@
-import { BlockInfoRow } from 'types/store/blocksStateType';
+import { BlockInfoRow } from 'types/store/UseBlocksState';
 
-// 모든 배열과 지금 누른 인덱스 받아와야함.
-/** bfs => dfs 변경
- * bfs가 메모리 사용량이 dfs보다 더 많으며, 지금 지뢰찾기는 커스텀으로 50*50 = 2500개의 데이터만 받지만, 확장가능성으로 더 큰 데이터를 받을 수도 있기에 dfs로 변경함.
- */
 export const propagationClickWithDfs = (blockMatrixInfo: BlockInfoRow[], startRow: number, startCol: number) => {
   return changeIsClickStateToClickedWithDfs(blockMatrixInfo, startRow, startCol);
 };

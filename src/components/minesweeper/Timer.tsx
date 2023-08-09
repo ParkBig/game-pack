@@ -1,18 +1,15 @@
 import { css } from '@emotion/react';
 import { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'store/configureStore';
-import { setTimer } from 'store/modules/blocksState';
+import useBlocksState from 'store/useBLocksState';
 
 export default function Timer() {
-  const dispatch = useDispatch();
-  const { timer, isGameProgress } = useSelector((state: RootState) => state.blocksState);
+  const { timer, isGameProgress, setTimer } = useBlocksState();
   const interval = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (isGameProgress) {
       interval.current = setInterval(() => {
-        dispatch(setTimer());
+        setTimer();
       }, 1000);
     } else if (!isGameProgress && timer !== 0) {
       clearInterval(interval.current!);
@@ -23,7 +20,7 @@ export default function Timer() {
         clearInterval(interval.current);
       }
     };
-  }, [isGameProgress, timer, dispatch]);
+  }, [isGameProgress, timer, setTimer]);
 
   return (
     <div css={wrap}>

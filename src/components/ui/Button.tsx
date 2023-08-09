@@ -1,12 +1,11 @@
 import { css } from '@emotion/react';
 import FlagSVG from 'assets/svg/Flag';
 import MineSVG from 'assets/svg/Mine';
-import { sortColor } from 'components/util/sortColor';
+import { sortColor } from 'util/sortColor';
 import GlobalStyle from 'const/globalStyle';
 import { ButtonHTMLAttributes } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store/configureStore';
-import { BlockInfo } from 'types/store/blocksStateType';
+import useBlocksState from 'store/useBLocksState';
+import { BlockInfo } from 'types/store/UseBlocksState';
 
 interface WrapProps {
   isClicked: boolean;
@@ -21,7 +20,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export default function Button({ isClicked, blockInfo, ...props }: Props) {
-  const isBlockClickPrevent = useSelector((state: RootState) => state.blocksState.isBlockClickPrevent);
+  const { isBlockClickPrevent } = useBlocksState();
   const disabled = isBlockClickPrevent || isClicked || blockInfo.isFlagged ? true : false;
   const sortedColor = sortColor(blockInfo.value);
 

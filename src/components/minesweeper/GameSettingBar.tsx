@@ -2,11 +2,10 @@ import { css } from '@emotion/react';
 import GlobalStyle from 'const/globalStyle';
 import { useState } from 'react';
 import GameModeSelector from './GameModeSelector';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store/configureStore';
+import useModalState from 'store/useModalState';
 
 export default function GameSettingBar() {
-  const isCustomSettingOpen = useSelector((state: RootState) => state.modalsState.isCustomSettingOpen);
+  const { isCustomSettingOpen } = useModalState();
   const [isSelectOpen, setIsSelectOpen] = useState(false);
 
   const toggleSelectOpenHandler = () => {

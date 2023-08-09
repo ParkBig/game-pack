@@ -1,15 +1,12 @@
 import { css } from '@emotion/react';
 import GlobalStyle from 'const/globalStyle';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'store/configureStore';
-import { initializeBlocks } from 'store/modules/blocksState';
+import useBlocksState from 'store/useBLocksState';
 
 export default function ResetBtn() {
-  const dispatch = useDispatch();
-  const { isBlockClickPrevent } = useSelector((state: RootState) => state.blocksState);
+  const { isBlockClickPrevent, initializeBlocks } = useBlocksState();
 
   const initialMinesHandler = () => {
-    dispatch(initializeBlocks());
+    initializeBlocks();
   };
 
   return (

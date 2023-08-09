@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store/configureStore';
+import useBlocksState from 'store/useBLocksState';
 
 export default function NumOfMines() {
-  const { numOfMines, numOfFlagged } = useSelector((state: RootState) => state.blocksState);
+  const { numOfMines, numOfFlagged } = useBlocksState();
 
   return (
     <div css={wrap}>

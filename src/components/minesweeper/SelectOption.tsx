@@ -1,11 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { initializeBlocks, setRowsCols } from 'store/modules/blocksState';
-import { RootState } from 'store/configureStore';
 import CheckSVG from 'assets/svg/Check';
 import { css } from '@emotion/react';
-import { Options } from 'types/store/blocksStateType';
-import { sortingGameMode } from 'components/util/sortingGameMode';
-import { toggleCustomSettingModal } from 'store/modules/modalsState';
+import { sortingGameMode } from 'util/sortingGameMode';
+import useBlocksState from 'store/useBLocksState';
+import useModalState from 'store/useModalState';
+import { Options } from 'types/store/UseBlocksState';
 
 interface WrapProps {
   new?: boolean;
@@ -16,21 +14,21 @@ interface Props {
 }
 
 export default function SelectOption({ optionValue }: Props) {
-  const dispatch = useDispatch();
-  const gameMode = useSelector((state: RootState) => state.blocksState.gameMode);
+  const { toggleCustomSettingModal } = useModalState();
+  const { gameMode, initializeBlocks, setRowsCols } = useBlocksState();
 
   const handleSelectHandler = () => {
     const selectedValue = optionValue;
     if (selectedValue === 'New') {
-      dispatch(initializeBlocks());
+      initializeBlocks();
       return;
     }
     if (selectedValue === 'Custom') {
-      dispatch(toggleCustomSettingModal());
+      toggleCustomSettingModal();
       return;
     } else {
       const payload = sortingGameMode(selectedValue);
-      dispatch(setRowsCols(payload));
+      setRowsCols(payload);
     }
   };
 

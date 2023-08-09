@@ -1,4 +1,4 @@
-import { BlockInfo, BlockInfoRow } from 'types/store/blocksStateType';
+import { BlockInfo, BlockInfoRow } from 'types/store/UseBlocksState';
 
 /** 랜덤마인 알고리즘.
  * 피셔-예이츠 셔플 알고리즘을 이용했습니다.
@@ -26,10 +26,7 @@ export const generateRandomMines = (
     }))
   );
 
-  console.log(board);
-
   if (!board[excludeIndex[0]][excludeIndex[1]].isMine) {
-    console.log(board, 'not');
     return board;
   } else {
     /** 버그 발견!

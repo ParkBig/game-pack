@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
-import { useSelector } from 'react-redux';
 import GameButton from './GameButton';
-import { RootState } from 'store/configureStore';
+import useBlocksState from 'store/useBLocksState';
 
 interface WrapProps {
   rows: number;
@@ -9,7 +8,7 @@ interface WrapProps {
 }
 
 export default function GameButtons() {
-  const { rows, cols, blockInfoMatrix } = useSelector((state: RootState) => state.blocksState);
+  const { rows, cols, blockInfoMatrix } = useBlocksState();
 
   return (
     <div css={wrap({ rows: rows, cols: cols })}>

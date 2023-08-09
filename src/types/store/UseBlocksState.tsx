@@ -1,4 +1,4 @@
-export interface BlocksInitialState {
+export interface UseBlocksState {
   rows: number;
   cols: number;
   numOfMines: number;
@@ -8,6 +8,14 @@ export interface BlocksInitialState {
   timer: number;
   isBlockClickPrevent: boolean;
   blockInfoMatrix: BlockInfoRow[];
+  initializeBlocks: () => void;
+  setRowsCols: (setRowsColPayload: SetRowColPayload) => void;
+  setIsGameProgress: (setIsGameProgressPayload: boolean) => void;
+  setBlocks: (setBlocksPayload: SetBlocksPayload) => void;
+  setBlockIsClicked: (setBlockIsClickedPayload: SetBlockIsClickedPayload) => void;
+  setIsBlockClickPrevent: (setIsBlockClickPreventPayload: boolean) => void;
+  setBlockIsFlagged: (setBlockIsFlaggedPayload: SetBlockIsFlaggedPayload) => void;
+  setTimer: () => void;
 }
 export type BlockInfoRow = BlockInfo[];
 export interface BlockInfo {
@@ -20,21 +28,21 @@ export type Value = number | null;
 export type GameMode = 'Beginner' | 'Intermediate' | 'Expert' | 'Custom';
 export type Options = 'New' | GameMode;
 
-export interface SetRowColPayloadAction {
+export interface SetRowColPayload {
   rows: number;
   cols: number;
   gameMode: GameMode;
   numOfMines: number;
 }
-export interface SetBlocksPayloadAction {
+export interface SetBlocksPayload {
   setsBlockInfoMatrix: BlockInfoRow[];
   isInitial: boolean;
 }
-export interface SetBlockIsClickedPayloadAction {
+export interface SetBlockIsClickedPayload {
   row: number;
   col: number;
 }
-export interface SetBlockIsFlaggedPayloadAction {
+export interface SetBlockIsFlaggedPayload {
   row: number;
   col: number;
 }
