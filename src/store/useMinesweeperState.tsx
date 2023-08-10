@@ -9,13 +9,15 @@ const useMinesweeperState = create(
     cols: 8,
     numOfMines: 10,
     numOfFlagged: 0,
-    gameMode: 'Beginner',
-    isGameProgress: false,
     timer: 0,
+    gameMode: 'Beginner',
+    isWin: false,
+    isGameProgress: false,
     isBlockClickPrevent: false,
     blockInfoMatrix: Array.from({ length: 8 }, () =>
       Array.from({ length: 8 }, () => ({ isMine: false, isClicked: false, value: null, isFlagged: false }))
     ),
+    clickedCount: 0,
     toggleIsOpenMinesweeper: () =>
       set(state => {
         if (state.isOpenMinesweeper) {
@@ -24,12 +26,14 @@ const useMinesweeperState = create(
           state.numOfMines = 10;
           state.numOfFlagged = 0;
           state.gameMode = 'Beginner';
-          state.isGameProgress = false;
           state.timer = 0;
+          state.isWin = false;
+          state.isGameProgress = false;
           state.isBlockClickPrevent = false;
           state.blockInfoMatrix = Array.from({ length: 8 }, () =>
             Array.from({ length: 8 }, () => ({ isMine: false, isClicked: false, value: null, isFlagged: false }))
           );
+          state.clickedCount = 0;
         }
         state.isOpenMinesweeper = !state.isOpenMinesweeper;
       }),
@@ -39,9 +43,11 @@ const useMinesweeperState = create(
         state.isBlockClickPrevent = false;
         state.numOfFlagged = 0;
         state.timer = 0;
+        state.isWin = false;
         state.blockInfoMatrix = Array.from({ length: state.rows }, () =>
           Array.from({ length: state.cols }, () => ({ isMine: false, isClicked: false, value: null, isFlagged: false }))
         );
+        state.clickedCount = 0;
       }),
     setRowsCols: setRowsCol =>
       set(state => {
@@ -53,9 +59,11 @@ const useMinesweeperState = create(
         state.isGameProgress = false;
         state.isBlockClickPrevent = false;
         state.timer = 0;
+        state.isWin = false;
         state.blockInfoMatrix = Array.from({ length: state.rows }, () =>
           Array.from({ length: state.cols }, () => ({ isMine: false, isClicked: false, value: null, isFlagged: false }))
         );
+        state.clickedCount = 0;
       }),
     setIsGameProgress: setIsGameProgress =>
       set(state => {
@@ -67,9 +75,17 @@ const useMinesweeperState = create(
           state.numOfFlagged = 0;
         }
         if (setBlocks.flaggedCount) {
-          state.numOfFlagged = state.numOfFlagged - setBlocks.flaggedCount;
+          state.numOfFlagged -= setBlocks.flaggedCount;
+        }
+        if (setBlocks.clickedCount) {
+          state.clickedCount += setBlocks.clickedCount;
         }
         state.blockInfoMatrix = setBlocks.setsBlockInfoMatrix;
+        if (state.clickedCount + state.numOfMines === state.rows * state.cols) {
+          state.isGameProgress = false;
+          state.isBlockClickPrevent = true;
+          state.isWin = true;
+        }
       }),
     setBlockIsClicked: setBlockIsClicked =>
       set(state => {
@@ -79,12 +95,18 @@ const useMinesweeperState = create(
         state.blockInfoMatrix = state.blockInfoMatrix.map((blockInfoRow, rowIndex) =>
           blockInfoRow.map((blockInfo, colIndex) => {
             if (rowIndex === setBlockIsClicked.row && colIndex === setBlockIsClicked.col) {
+              state.clickedCount++;
               return { ...blockInfo, isClicked: true };
             } else {
               return blockInfo;
             }
           })
         );
+        if (state.clickedCount + state.numOfMines === state.rows * state.cols) {
+          state.isGameProgress = false;
+          state.isBlockClickPrevent = true;
+          state.isWin = true;
+        }
       }),
     setIsBlockClickPrevent: setIsBlockClickPrevent =>
       set(state => {

@@ -3,7 +3,7 @@ import GlobalStyle from 'const/globalStyle';
 import useMinesweeperState from 'store/useMinesweeperState';
 
 export default function ResetBtn() {
-  const { isBlockClickPrevent, initializeBlocks } = useMinesweeperState();
+  const { isWin, isBlockClickPrevent, initializeBlocks } = useMinesweeperState();
 
   const initialMinesHandler = () => {
     initializeBlocks();
@@ -11,7 +11,7 @@ export default function ResetBtn() {
 
   return (
     <div css={upperBtn} onClick={initialMinesHandler}>
-      <button css={btn}>{isBlockClickPrevent ? '🥺' : '😀'}</button>
+      <button css={btn}>{isBlockClickPrevent ? (isWin ? '😀' : '🥺') : '😀'}</button>
     </div>
   );
 }

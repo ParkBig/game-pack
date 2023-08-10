@@ -45,11 +45,16 @@ export default function GameButton({ blockInfo, thisRow, thisCol }: Props) {
       setIsBlockClickPrevent(true);
       return;
     }
-    const { propagatedBlockInfoMatrix, flaggedCount } = propagationClickWithDfs(blockInfoMatrix, thisRow, thisCol);
+    const { propagatedBlockInfoMatrix, flaggedCount, clickedCount } = propagationClickWithDfs(
+      blockInfoMatrix,
+      thisRow,
+      thisCol
+    );
     const payload: SetBlocksPayload = {
       isInitial: false,
       setsBlockInfoMatrix: propagatedBlockInfoMatrix,
       flaggedCount,
+      clickedCount,
     };
     setBlocks(payload);
   };

@@ -18,7 +18,7 @@ export default function Minesweeper() {
     <div css={wrap}>
       {isOpenMinesweeper && (
         <DraggableCore nodeRef={draggableRef} cancel=".non-draggable" bounds=".draggable-area">
-          <main css={main} ref={draggableRef}>
+          <main className="Minesweeper" css={main} ref={draggableRef}>
             <Header />
             <GameSettingBar />
             <Game />

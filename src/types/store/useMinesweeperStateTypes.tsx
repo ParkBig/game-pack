@@ -7,8 +7,10 @@ export interface UseMinesweeperState {
   gameMode: GameMode;
   isGameProgress: boolean;
   timer: number;
+  isWin: boolean;
   isBlockClickPrevent: boolean;
   blockInfoMatrix: BlockInfoRow[];
+  clickedCount: number;
   toggleIsOpenMinesweeper: () => void;
   initializeBlocks: () => void;
   setRowsCols: (setRowsColPayload: SetRowColPayload) => void;
@@ -40,6 +42,7 @@ export interface SetBlocksPayload {
   setsBlockInfoMatrix: BlockInfoRow[];
   isInitial: boolean;
   flaggedCount?: number;
+  clickedCount?: number;
 }
 export interface SetBlockIsClickedPayload {
   row: number;

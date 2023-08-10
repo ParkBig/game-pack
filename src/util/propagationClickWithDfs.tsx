@@ -6,6 +6,7 @@ export const propagationClickWithDfs = (blockMatrixInfo: BlockInfoRow[], startRo
   const cols = blockMatrixInfo[0].length;
   const newArr = blockMatrixInfo.map(row => [...row]);
   let flaggedCount = 0;
+  let clickedCount = -1;
 
   while (stack.length > 0) {
     const [row, col] = stack.pop()!;
@@ -25,6 +26,7 @@ export const propagationClickWithDfs = (blockMatrixInfo: BlockInfoRow[], startRo
       flaggedCount++;
     }
 
+    clickedCount++;
     newArr[row][col] = { ...newArr[row][col], isClicked: true, isFlagged: false };
 
     if (newArr[row][col].value) {
@@ -40,6 +42,6 @@ export const propagationClickWithDfs = (blockMatrixInfo: BlockInfoRow[], startRo
     stack.push([row + 1, col]);
     stack.push([row + 1, col + 1]);
   }
-
-  return { propagatedBlockInfoMatrix: newArr, flaggedCount };
+  console.log('propa', clickedCount);
+  return { propagatedBlockInfoMatrix: newArr, flaggedCount, clickedCount };
 };
