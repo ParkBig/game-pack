@@ -31,25 +31,34 @@ export default function GameButton({ blockInfo, thisRow, thisCol }: Props) {
       const setsBlockInfoMatrix = generateRandomMines(rows, cols, numOfMines, [thisRow, thisCol]);
       const payload: SetBlocksPayload = { isInitial: true, setsBlockInfoMatrix };
       setBlocks(payload);
-      setIsGameProgress(true);
       return;
     }
   };
 
   const onClickHandler = () => {
+    if (!isGameProgress) {
+      setIsGameProgress(true);
+    }
     setBlockIsClicked({ row: thisRow, col: thisCol });
     if (blockInfo.isMine) {
       setIsGameProgress(false);
       setIsBlockClickPrevent(true);
       return;
     }
-    const propagatedBlockInfoMatrix = propagationClickWithDfs(blockInfoMatrix, thisRow, thisCol);
-    const payload: SetBlocksPayload = { isInitial: false, setsBlockInfoMatrix: propagatedBlockInfoMatrix };
+    const { propagatedBlockInfoMatrix, flaggedCount } = propagationClickWithDfs(blockInfoMatrix, thisRow, thisCol);
+    const payload: SetBlocksPayload = {
+      isInitial: false,
+      setsBlockInfoMatrix: propagatedBlockInfoMatrix,
+      flaggedCount,
+    };
     setBlocks(payload);
   };
 
   const onRightMouseClickHandler = (ev: React.MouseEvent<HTMLButtonElement>) => {
     ev.preventDefault();
+    if (!isGameProgress) {
+      setIsGameProgress(true);
+    }
     if (isBlockClickPrevent || blockInfo.isClicked) {
       return;
     }

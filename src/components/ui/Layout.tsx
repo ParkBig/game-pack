@@ -1,12 +1,11 @@
 import { Global, css } from '@emotion/react';
-import GlobalStyle from 'const/globalStyle';
 import normalize from 'emotion-normalize';
 
 interface Props {
   children: React.ReactNode;
 }
 
-export default function Layout(props: Props) {
+export default function Layout({ children }: Props) {
   return (
     <>
       <Global
@@ -14,9 +13,6 @@ export default function Layout(props: Props) {
           @import url('https://fonts.googleapis.com/css2?family=Wallpoet&display=swap');
           ${normalize}
           body {
-            background-image: url(${GlobalStyle.backgroundImageUrl});
-            background-size: cover;
-            background-position: center;
             margin: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
               'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -32,7 +28,7 @@ export default function Layout(props: Props) {
           }
         `}
       />
-      {props.children}
+      {children}
     </>
   );
 }

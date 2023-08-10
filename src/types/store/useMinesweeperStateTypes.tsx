@@ -39,6 +39,7 @@ export interface SetRowColPayload {
 export interface SetBlocksPayload {
   setsBlockInfoMatrix: BlockInfoRow[];
   isInitial: boolean;
+  flaggedCount?: number;
 }
 export interface SetBlockIsClickedPayload {
   row: number;

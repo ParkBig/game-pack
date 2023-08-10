@@ -4,7 +4,7 @@ import { immer } from 'zustand/middleware/immer';
 
 const useMinesweeperState = create(
   immer<UseMinesweeperState>(set => ({
-    isOpenMinesweeper: true,
+    isOpenMinesweeper: false,
     rows: 8,
     cols: 8,
     numOfMines: 10,
@@ -66,6 +66,9 @@ const useMinesweeperState = create(
         if (setBlocks.isInitial) {
           state.numOfFlagged = 0;
         }
+        if (setBlocks.flaggedCount) {
+          state.numOfFlagged = state.numOfFlagged - setBlocks.flaggedCount;
+        }
         state.blockInfoMatrix = setBlocks.setsBlockInfoMatrix;
       }),
     setBlockIsClicked: setBlockIsClicked =>
@@ -92,7 +95,7 @@ const useMinesweeperState = create(
         state.blockInfoMatrix = state.blockInfoMatrix.map((blockInfoRow, rowIndex) =>
           blockInfoRow.map((blockInfo, colIndex) => {
             if (rowIndex === setBlockIsFlagged.row && colIndex === setBlockIsFlagged.col) {
-              blockInfo.isFlagged === false ? state.numOfMines++ : state.numOfFlagged--;
+              blockInfo.isFlagged === false ? state.numOfFlagged++ : state.numOfFlagged--;
               return { ...blockInfo, isFlagged: !blockInfo.isFlagged };
             } else {
               return blockInfo;

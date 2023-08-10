@@ -1,4 +1,4 @@
-import { UseModalState } from 'types/store/UseModalState';
+import { UseModalState } from 'types/store/useModalStateTypes';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 

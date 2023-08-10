@@ -5,25 +5,17 @@ import GameSettingBar from './GameSettingBar';
 import Game from './Game';
 import DraggableCore from 'react-draggable';
 import { useRef } from 'react';
-import MineSVG from 'assets/svg/Mine';
 import useMinesweeperState from 'store/useMinesweeperState';
+import useModalState from 'store/useModalState';
+import CustomSettingModal from './CustomSettingModal';
 
 export default function Minesweeper() {
   const draggableRef = useRef<HTMLDivElement>(null);
-  const { isOpenMinesweeper, toggleIsOpenMinesweeper } = useMinesweeperState();
-
-  const openMinesweeperHandler = () => {
-    if (!isOpenMinesweeper) {
-      toggleIsOpenMinesweeper();
-    }
-  };
+  const { isOpenMinesweeper } = useMinesweeperState();
+  const { isCustomSettingOpen } = useModalState();
 
   return (
-    <div css={wrap} className="draggable-area">
-      <div css={icon} onDoubleClick={openMinesweeperHandler}>
-        <MineSVG fill="black" width="45" height="45" />
-        <span>지뢰찾기</span>
-      </div>
+    <div css={wrap}>
       {isOpenMinesweeper && (
         <DraggableCore nodeRef={draggableRef} cancel=".non-draggable" bounds=".draggable-area">
           <main css={main} ref={draggableRef}>
@@ -33,26 +25,16 @@ export default function Minesweeper() {
           </main>
         </DraggableCore>
       )}
+      {isCustomSettingOpen && <CustomSettingModal />}
     </div>
   );
 }
 
 const wrap = css`
-  min-height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-const icon = css`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  cursor: pointer;
 `;
 const main = css`
   display: flex;

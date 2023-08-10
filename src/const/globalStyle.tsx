@@ -11,6 +11,8 @@ const GlobalStyle = {
     gray: '#cccccc',
     headerBackgroundColor: '#8993df',
     settingBarBackgroundColor: '#ebedd1',
+    desktopUnderBarColor: '#4e57d8',
+    desktopUnderBarStartBackgroundColor: '#398c27',
   },
   backgroundImageUrl:
     'https://p4.wallpaperbetter.com/wallpaper/948/972/59/nature-landscape-sky-hill-grass-field-clouds-windows-xp-wallpaper-preview.jpg',
