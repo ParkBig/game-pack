@@ -18,6 +18,7 @@ const useMinesweeperState = create(
       Array.from({ length: 8 }, () => ({ isMine: false, isClicked: false, value: null, isFlagged: false }))
     ),
     clickedCount: 0,
+    isCustomSettingOpen: false,
     toggleIsOpenMinesweeper: () =>
       set(state => {
         if (state.isOpenMinesweeper) {
@@ -128,6 +129,10 @@ const useMinesweeperState = create(
     setTimer: () =>
       set(state => {
         state.timer++;
+      }),
+    toggleCustomSettingModal: () =>
+      set(state => {
+        state.isCustomSettingOpen = !state.isCustomSettingOpen;
       }),
   }))
 );

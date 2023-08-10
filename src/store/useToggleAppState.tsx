@@ -1,9 +1,9 @@
-import { UseOpenGameStateTypes } from 'types/store/useOpenGameStateTypes';
+import { UseToggleApp } from 'types/store/useToggleAppTypes';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
-const useOpenGameState = create(
-  immer<UseOpenGameStateTypes>(set => ({
+const useToggleAppState = create(
+  immer<UseToggleApp>(set => ({
     openGame: [],
     setOpenGame: (toggleState, target) =>
       set(state => {
@@ -17,4 +17,4 @@ const useOpenGameState = create(
   }))
 );
 
-export default useOpenGameState;
+export default useToggleAppState;

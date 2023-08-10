@@ -2,10 +2,10 @@ import { css } from '@emotion/react';
 import GlobalStyle from 'const/globalStyle';
 import { useState } from 'react';
 import GameModeSelector from './GameModeSelector';
-import useModalState from 'store/useModalState';
+import useMinesweeperState from 'store/useMinesweeperState';
 
 export default function GameSettingBar() {
-  const { isCustomSettingOpen } = useModalState();
+  const { isCustomSettingOpen } = useMinesweeperState();
   const [isSelectOpen, setIsSelectOpen] = useState(false);
 
   const toggleSelectOpenHandler = () => {

@@ -3,13 +3,11 @@ import CloseSVG from 'assets/svg/Close';
 import MineSVG from 'assets/svg/Mine';
 import GlobalStyle from 'const/globalStyle';
 import useMinesweeperState from 'store/useMinesweeperState';
-import useModalState from 'store/useModalState';
-import useOpenGameState from 'store/useOpenGameState';
+import useToggleAppState from 'store/useToggleAppState';
 
 export default function Header() {
-  const { toggleIsOpenMinesweeper } = useMinesweeperState();
-  const { isCustomSettingOpen, toggleCustomSettingModal } = useModalState();
-  const { setOpenGame } = useOpenGameState();
+  const { toggleIsOpenMinesweeper, isCustomSettingOpen, toggleCustomSettingModal } = useMinesweeperState();
+  const { setOpenGame } = useToggleAppState();
 
   const closeMinesweeperHandler = () => {
     if (isCustomSettingOpen) {

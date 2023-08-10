@@ -11,6 +11,7 @@ export interface UseMinesweeperState {
   isBlockClickPrevent: boolean;
   blockInfoMatrix: BlockInfoRow[];
   clickedCount: number;
+  isCustomSettingOpen: boolean;
   toggleIsOpenMinesweeper: () => void;
   initializeBlocks: () => void;
   setRowsCols: (setRowsColPayload: SetRowColPayload) => void;
@@ -20,6 +21,7 @@ export interface UseMinesweeperState {
   setIsBlockClickPrevent: (setIsBlockClickPreventPayload: boolean) => void;
   setBlockIsFlagged: (setBlockIsFlaggedPayload: SetBlockIsFlaggedPayload) => void;
   setTimer: () => void;
+  toggleCustomSettingModal: () => void;
 }
 export type BlockInfoRow = BlockInfo[];
 export interface BlockInfo {

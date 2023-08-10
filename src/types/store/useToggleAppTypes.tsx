@@ -1,4 +1,4 @@
-export interface UseOpenGameStateTypes {
+export interface UseToggleApp {
   openGame: Target[];
   setOpenGame: (toggleState: ToggleState, target: Target) => void;
 }

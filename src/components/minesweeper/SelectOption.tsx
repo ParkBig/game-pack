@@ -2,7 +2,6 @@ import CheckSVG from 'assets/svg/Check';
 import { css } from '@emotion/react';
 import { sortingGameMode } from 'util/sortingGameMode';
 import useMinesweeperState from 'store/useMinesweeperState';
-import useModalState from 'store/useModalState';
 import { Options } from 'types/store/useMinesweeperStateTypes';
 
 interface WrapProps {
@@ -14,8 +13,7 @@ interface Props {
 }
 
 export default function SelectOption({ optionValue }: Props) {
-  const { toggleCustomSettingModal } = useModalState();
-  const { gameMode, initializeBlocks, setRowsCols } = useMinesweeperState();
+  const { gameMode, toggleCustomSettingModal, initializeBlocks, setRowsCols } = useMinesweeperState();
 
   const handleSelectHandler = () => {
     const selectedValue = optionValue;

@@ -3,13 +3,11 @@ import GlobalStyle from 'const/globalStyle';
 import ReactDOM from 'react-dom';
 import CustomInput from './CustomInput';
 import { useRef } from 'react';
-import useModalState from 'store/useModalState';
 import useMinesweeperState from 'store/useMinesweeperState';
 import { SetRowColPayload } from 'types/store/useMinesweeperStateTypes';
 
 export default function CustomSettingModal() {
-  const { setRowsCols } = useMinesweeperState();
-  const { toggleCustomSettingModal } = useModalState();
+  const { setRowsCols, toggleCustomSettingModal } = useMinesweeperState();
   const rowsInputRef = useRef<HTMLInputElement>(null);
   const colsInputRef = useRef<HTMLInputElement>(null);
   const minesInputRef = useRef<HTMLInputElement>(null);

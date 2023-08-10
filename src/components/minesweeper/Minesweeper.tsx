@@ -6,13 +6,11 @@ import Game from './Game';
 import DraggableCore from 'react-draggable';
 import { useRef } from 'react';
 import useMinesweeperState from 'store/useMinesweeperState';
-import useModalState from 'store/useModalState';
 import CustomSettingModal from './CustomSettingModal';
 
 export default function Minesweeper() {
   const draggableRef = useRef<HTMLDivElement>(null);
-  const { isOpenMinesweeper } = useMinesweeperState();
-  const { isCustomSettingOpen } = useModalState();
+  const { isOpenMinesweeper, isCustomSettingOpen } = useMinesweeperState();
 
   return (
     <div css={wrap}>

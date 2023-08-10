@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
-import WindowSVG from 'assets/svg/Window';
 import GlobalStyle from 'const/globalStyle';
-import useOpenGameState from 'store/useOpenGameState';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import StrictModeDroppable from 'components/ui/StrictModeDroppable';
 import DraggableUnderBar from './DraggableUnderBar';
+import ToggleStartMenu from './ToggleStartMenu';
+import useToggleAppState from 'store/useToggleAppState';
 
 export default function UnderBar() {
-  const { openGame } = useOpenGameState();
+  const { openGame } = useToggleAppState();
 
   const onDragEndHandler = (info: DropResult) => {
     const { source, destination } = info;
@@ -16,10 +16,7 @@ export default function UnderBar() {
 
   return (
     <div css={underbar}>
-      <div css={start}>
-        <WindowSVG />
-        start
-      </div>
+      <ToggleStartMenu />
       <DragDropContext onDragEnd={onDragEndHandler}>
         <StrictModeDroppable droppableId="games">
           {provided => (
@@ -43,21 +40,6 @@ const underbar = css`
   align-items: center;
   background-color: ${GlobalStyle.colors.desktopUnderBarColor};
   gap: 5px;
-`;
-const start = css`
-  width: 120px;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  border: 1px outset;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  font-weight: bold;
-  color: white;
-  background-color: ${GlobalStyle.colors.desktopUnderBarStartBackgroundColor};
-  cursor: pointer;
 `;
 const games = css`
   width: 100%;

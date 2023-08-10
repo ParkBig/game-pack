@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import CloseSVG from 'assets/svg/Close';
 import { Draggable } from 'react-beautiful-dnd';
 import useMinesweeperState from 'store/useMinesweeperState';
-import useOpenGameState from 'store/useOpenGameState';
-import { Target } from 'types/store/useOpenGameStateTypes';
+import useToggleAppState from 'store/useToggleAppState';
+import { Target } from 'types/store/useToggleAppTypes';
 
 interface Props {
   game: Target;
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function DraggableUnderBar({ game, index }: Props) {
-  const { setOpenGame } = useOpenGameState();
+  const { setOpenGame } = useToggleAppState();
   const { toggleIsOpenMinesweeper } = useMinesweeperState();
 
   const closeGameHandler = () => {
