@@ -5,6 +5,7 @@ import { immer } from 'zustand/middleware/immer';
 const useToggleAppState = create(
   immer<UseToggleApp>(set => ({
     openGame: [],
+    isOpenMenuList: false,
     setOpenGame: (toggleState, target) =>
       set(state => {
         if (toggleState === 'open') {
@@ -13,6 +14,10 @@ const useToggleAppState = create(
         if (toggleState === 'close') {
           state.openGame = state.openGame.filter(game => game !== target);
         }
+      }),
+    setIsOpenMenuList: () =>
+      set(state => {
+        state.isOpenMenuList = !state.isOpenMenuList;
       }),
   }))
 );

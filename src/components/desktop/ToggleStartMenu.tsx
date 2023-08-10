@@ -2,10 +2,17 @@ import { css } from '@emotion/react';
 import WindowSVG from 'assets/svg/Window';
 import GlobalStyle from 'const/globalStyle';
 import StartMenuList from './StartMenuList';
+import useToggleAppState from 'store/useToggleAppState';
 
 export default function ToggleStartMenu() {
+  const { setIsOpenMenuList } = useToggleAppState();
+
+  const toggleStartMenuHandler = () => {
+    setIsOpenMenuList();
+  };
+
   return (
-    <div css={start}>
+    <div css={start} onClick={toggleStartMenuHandler}>
       <WindowSVG />
       <span>start</span>
       <StartMenuList />

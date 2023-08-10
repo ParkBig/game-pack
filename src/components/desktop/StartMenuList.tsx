@@ -1,18 +1,15 @@
 import { css } from '@emotion/react';
 import StartMenu from './StartMenu';
+import useToggleAppState from 'store/useToggleAppState';
 
 export type MenuList = '지뢰찾기';
 
 const menuList: MenuList[] = ['지뢰찾기'];
 
 export default function StartMenuList() {
-  return (
-    <div css={wrap}>
-      {menuList.map(menu => (
-        <StartMenu key={menu} type={menu} />
-      ))}
-    </div>
-  );
+  const { isOpenMenuList } = useToggleAppState();
+
+  return <div css={wrap}>{isOpenMenuList && menuList.map(menu => <StartMenu key={menu} type={menu} />)}</div>;
 }
 
 const wrap = css`
