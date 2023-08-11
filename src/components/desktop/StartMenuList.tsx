@@ -1,15 +1,30 @@
 import { css } from '@emotion/react';
 import StartMenu from './StartMenu';
 import useToggleAppState from 'store/useToggleAppState';
+import GlobalStyle from 'const/globalStyle';
+import MineSVG from 'assets/svg/Mine';
 
-export type MenuList = '지뢰찾기';
+export interface MenuList {
+  icon: React.ReactNode;
+  name: '지뢰찾기';
+}
 
-const menuList: MenuList[] = ['지뢰찾기'];
+const menuList: MenuList[] = [{ icon: <MineSVG fill="black" width="25" height="25" />, name: '지뢰찾기' }];
 
 export default function StartMenuList() {
   const { isOpenMenuList } = useToggleAppState();
 
-  return <div css={wrap}>{isOpenMenuList && menuList.map(menu => <StartMenu key={menu} type={menu} />)}</div>;
+  return (
+    <>
+      {isOpenMenuList && (
+        <div css={wrap}>
+          {menuList.map(menu => (
+            <StartMenu key={menu.name} menu={menu} />
+          ))}
+        </div>
+      )}
+    </>
+  );
 }
 
 const wrap = css`
@@ -22,4 +37,6 @@ const wrap = css`
   position: absolute;
   left: 0;
   bottom: 40px;
+  border: 6px solid ${GlobalStyle.colors.desktopUnderBarColor};
+  background-color: white;
 `;

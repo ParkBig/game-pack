@@ -4,15 +4,15 @@ import useMinesweeperState from 'store/useMinesweeperState';
 import useToggleAppState from 'store/useToggleAppState';
 
 interface Props {
-  type: MenuList;
+  menu: MenuList;
 }
 
-export default function StartMenu({ type }: Props) {
+export default function StartMenu({ menu }: Props) {
   const { isOpenMinesweeper, toggleIsOpenMinesweeper } = useMinesweeperState();
   const { setOpenGame } = useToggleAppState();
 
   const onClickHandler = () => {
-    if (type === '지뢰찾기' && !isOpenMinesweeper) {
+    if (menu.name === '지뢰찾기' && !isOpenMinesweeper) {
       toggleIsOpenMinesweeper();
       setOpenGame('open', 'Minesweeper');
     }
@@ -20,7 +20,8 @@ export default function StartMenu({ type }: Props) {
 
   return (
     <div css={wrap} onClick={onClickHandler}>
-      {type}
+      {menu.icon}
+      {menu.name}
     </div>
   );
 }
@@ -29,6 +30,8 @@ const wrap = css`
   width: 100%;
   height: 40px;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
+  padding-left: 10px;
+  color: black;
 `;
