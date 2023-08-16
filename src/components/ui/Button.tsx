@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import FlagSVG from 'assets/svg/Flag';
 import MineSVG from 'assets/svg/Mine';
-import { sortColor } from 'util/sortColor';
 import GlobalStyle from 'const/globalStyle';
 import { ButtonHTMLAttributes } from 'react';
 import useMinesweeperState from 'store/useMinesweeperState';
 import { BlockInfo } from 'types/store/useMinesweeperStateTypes';
+import { sortColor } from 'util/minesweeper/sortColor';
 
 interface WrapProps {
   isClicked: boolean;

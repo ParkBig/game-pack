@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import CloseSVG from 'assets/svg/Close';
 import { Draggable } from 'react-beautiful-dnd';
+import useChessState from 'store/useChessState';
 import useMinesweeperState from 'store/useMinesweeperState';
 import useToggleAppState from 'store/useToggleAppState';
 import { Target } from 'types/store/useToggleAppTypes';
@@ -13,11 +14,15 @@ interface Props {
 export default function DraggableUnderBar({ game, index }: Props) {
   const { setOpenGame } = useToggleAppState();
   const { toggleIsOpenMinesweeper } = useMinesweeperState();
+  const { toggleIsOpenChessGame } = useChessState();
 
   const closeGameHandler = () => {
     setOpenGame('close', game);
     if (game === 'Minesweeper') {
       toggleIsOpenMinesweeper();
+    }
+    if (game === 'ChessGame') {
+      toggleIsOpenChessGame();
     }
   };
 

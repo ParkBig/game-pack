@@ -10,19 +10,17 @@ import CustomSettingModal from './CustomSettingModal';
 
 export default function Minesweeper() {
   const draggableRef = useRef<HTMLDivElement>(null);
-  const { isOpenMinesweeper, isCustomSettingOpen } = useMinesweeperState();
+  const { isCustomSettingOpen } = useMinesweeperState();
 
   return (
     <div css={wrap}>
-      {isOpenMinesweeper && (
-        <DraggableCore nodeRef={draggableRef} cancel=".non-draggable" bounds=".draggable-area">
-          <main className="Minesweeper" css={main} ref={draggableRef}>
-            <Header />
-            <GameSettingBar />
-            <Game />
-          </main>
-        </DraggableCore>
-      )}
+      <DraggableCore nodeRef={draggableRef} cancel=".non-draggable" bounds=".draggable-area">
+        <main className="Minesweeper" css={main} ref={draggableRef}>
+          <Header />
+          <GameSettingBar />
+          <Game />
+        </main>
+      </DraggableCore>
       {isCustomSettingOpen && <CustomSettingModal />}
     </div>
   );

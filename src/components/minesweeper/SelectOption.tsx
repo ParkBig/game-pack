@@ -1,8 +1,8 @@
 import CheckSVG from 'assets/svg/Check';
 import { css } from '@emotion/react';
-import { sortingGameMode } from 'util/sortingGameMode';
 import useMinesweeperState from 'store/useMinesweeperState';
 import { Options } from 'types/store/useMinesweeperStateTypes';
+import { sortingGameMode } from 'util/minesweeper/sortingGameMode';
 
 interface WrapProps {
   new?: boolean;

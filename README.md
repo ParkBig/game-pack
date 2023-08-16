@@ -8,7 +8,7 @@
 
 ## 😎 **`시연 영상 및 이미지`**
 
-- [유투브 시연영상 보기 클릭!](https://www.youtube.com/watch?v=E_18xN__jog)
+- [유투브 시연영상 보기 클릭!](https://youtu.be/I8NAlDIx86w)
   - 게임실행 및 드래그
 
     ![chess1](https://github.com/ParkBig/minesweeper/assets/105584331/0df441b7-c58a-4bed-b5d6-f382ac4214de)

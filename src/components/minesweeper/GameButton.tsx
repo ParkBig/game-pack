@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import Button from 'components/ui/Button';
-import { generateRandomMines } from 'util/makeBlockMatrix';
-import { propagationClickWithDfs } from 'util/propagationClickWithDfs';
 import useMinesweeperState from 'store/useMinesweeperState';
 import { BlockInfo, SetBlockIsFlaggedPayload, SetBlocksPayload } from 'types/store/useMinesweeperStateTypes';
+import { generateRandomMines } from 'util/minesweeper/makeBlockMatrix';
+import { propagationClickWithDfs } from 'util/minesweeper/propagationClickWithDfs';
 
 interface Props {
   blockInfo: BlockInfo;

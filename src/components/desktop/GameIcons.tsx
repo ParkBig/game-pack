@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
+import ChessSVG from 'assets/svg/Chess';
 import MineSVG from 'assets/svg/Mine';
+import useChessState from 'store/useChessState';
 import useMinesweeperState from 'store/useMinesweeperState';
 import useToggleAppState from 'store/useToggleAppState';
 
@@ -10,12 +12,28 @@ interface IconProps {
 
 export default function GameIcons() {
   const { isOpenMinesweeper, toggleIsOpenMinesweeper } = useMinesweeperState();
+  const { isOpenChessGame, toggleIsOpenChessGame } = useChessState();
   const { setOpenGame } = useToggleAppState();
 
   const openMinesweeperHandler = () => {
+    if (isOpenChessGame) {
+      toggleIsOpenChessGame();
+      setOpenGame('close', 'ChessGame');
+    }
     if (!isOpenMinesweeper) {
       toggleIsOpenMinesweeper();
       setOpenGame('open', 'Minesweeper');
+    }
+  };
+
+  const openChessGameHandler = () => {
+    if (isOpenMinesweeper) {
+      setOpenGame('close', 'Minesweeper');
+      toggleIsOpenMinesweeper();
+    }
+    if (!isOpenChessGame) {
+      toggleIsOpenChessGame();
+      setOpenGame('open', 'ChessGame');
     }
   };
 
@@ -24,6 +42,10 @@ export default function GameIcons() {
       <div css={icon({ top: '10px', left: '10px' })} onDoubleClick={openMinesweeperHandler}>
         <MineSVG fill="black" width="45" height="45" />
         <span>지뢰찾기</span>
+      </div>
+      <div css={icon({ top: '90px', left: '10px' })} onDoubleClick={openChessGameHandler}>
+        <ChessSVG viewBox="550" length="45" />
+        <span>체스게임</span>
       </div>
     </div>
   );

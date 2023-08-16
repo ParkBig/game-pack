@@ -6,4 +6,4 @@ export interface UseToggleApp {
 }
 
 type ToggleState = 'close' | 'open';
-export type Target = 'Minesweeper';
+export type Target = 'Minesweeper' | 'ChessGame';

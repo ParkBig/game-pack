@@ -3,13 +3,20 @@ import Minesweeper from 'components/minesweeper/Minesweeper';
 import GlobalStyle from 'const/globalStyle';
 import GameIcons from './GameIcons';
 import UnderBar from './UnderBar';
+import ChessGame from 'components/chessGame/ChessGame';
+import useMinesweeperState from 'store/useMinesweeperState';
+import useChessState from 'store/useChessState';
 
 export default function Desktop() {
+  const { isOpenMinesweeper } = useMinesweeperState();
+  const { isOpenChessGame } = useChessState();
+
   return (
     <div css={wrap}>
       <GameIcons />
       <div css={content} className="draggable-area">
-        <Minesweeper />
+        {isOpenMinesweeper && <Minesweeper />}
+        {isOpenChessGame && <ChessGame />}
       </div>
       <UnderBar />
     </div>
