@@ -5,6 +5,7 @@ import useChessState from 'store/useChessState';
 import useMinesweeperState from 'store/useMinesweeperState';
 import useToggleAppState from 'store/useToggleAppState';
 import { Target } from 'types/store/useToggleAppTypes';
+import { socket } from 'util/chess/socketIo';
 
 interface Props {
   game: Target;
@@ -14,7 +15,8 @@ interface Props {
 export default function DraggableUnderBar({ game, index }: Props) {
   const { setOpenGame } = useToggleAppState();
   const { toggleIsOpenMinesweeper } = useMinesweeperState();
-  const { toggleIsOpenChessGame } = useChessState();
+  const { matchRoomName, setIsStart, setMyIsInGame, setGotCha, toggleIsOpenChessGame, setMatchRoomName } =
+    useChessState();
 
   const closeGameHandler = () => {
     setOpenGame('close', game);
@@ -23,6 +25,13 @@ export default function DraggableUnderBar({ game, index }: Props) {
     }
     if (game === 'ChessGame') {
       toggleIsOpenChessGame();
+      setMatchRoomName();
+      if (matchRoomName) {
+        setIsStart('false');
+        setMyIsInGame(false);
+        setGotCha();
+        socket.emit('leave-or-initialize-room', { roomName: matchRoomName, state: 'leave' });
+      }
     }
   };
 

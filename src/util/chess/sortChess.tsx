@@ -1,17 +1,17 @@
 import { ChessColor, Chessmen } from 'types/store/useChessStateTypes';
 
-import whiteBishop from 'assets/chess/chessman/white-bishop.png';
-import whiteKing from 'assets/chess/chessman/white-king.png';
-import whiteKnight from 'assets/chess/chessman/white-knight.png';
-import whitePawn from 'assets/chess/chessman/white-pawn.png';
-import whiteQueen from 'assets/chess/chessman/white-queen.png';
-import whiteRook from 'assets/chess/chessman/white-rook.png';
-import blackBishop from 'assets/chess/chessman/black-bishop.png';
-import blackKing from 'assets/chess/chessman/black-king.png';
-import blackKnight from 'assets/chess/chessman/black-knight.png';
-import blackPawn from 'assets/chess/chessman/black-pawn.png';
-import blackQueen from 'assets/chess/chessman/black-queen.png';
-import blackRook from 'assets/chess/chessman/black-rook.png';
+import whiteBishop from 'assets/chess/chessmen/white-bishop.png';
+import whiteKing from 'assets/chess/chessmen/white-king.png';
+import whiteKnight from 'assets/chess/chessmen/white-knight.png';
+import whitePawn from 'assets/chess/chessmen/white-pawn.png';
+import whiteQueen from 'assets/chess/chessmen/white-queen.png';
+import whiteRook from 'assets/chess/chessmen/white-rook.png';
+import blackBishop from 'assets/chess/chessmen/black-bishop.png';
+import blackKing from 'assets/chess/chessmen/black-king.png';
+import blackKnight from 'assets/chess/chessmen/black-knight.png';
+import blackPawn from 'assets/chess/chessmen/black-pawn.png';
+import blackQueen from 'assets/chess/chessmen/black-queen.png';
+import blackRook from 'assets/chess/chessmen/black-rook.png';
 
 const sortChess = (chessColor: ChessColor, chessmenType: Chessmen) => {
   if (chessColor === 'white') {
@@ -55,7 +55,7 @@ const sortChess = (chessColor: ChessColor, chessmenType: Chessmen) => {
     }
   }
   if (!chessColor) {
-    return null;
+    return undefined;
   }
 };
 
