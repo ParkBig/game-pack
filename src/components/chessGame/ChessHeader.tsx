@@ -54,9 +54,11 @@ export default function ChessHeader() {
         </div>
       )}
       <div css={upperBtn}>
-        <div css={btn} onClick={goBackToFindMatchHandler}>
-          <GoBackSVG />
-        </div>
+        {matchRoomName && (
+          <div css={btn} onClick={goBackToFindMatchHandler}>
+            <GoBackSVG />
+          </div>
+        )}
         <div css={btn} onClick={closeChessGameHandler}>
           <CloseSVG />
         </div>
