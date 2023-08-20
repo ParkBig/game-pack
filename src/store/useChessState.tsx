@@ -155,7 +155,7 @@ const useChessState = create(
     setMyLogInInfo: async (nickname, password) => {
       try {
         const data = { nickname, password };
-        const response = await fetch(`${process.env.REACT_APP_DEV_SERVER_URL}/login`, {
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -185,7 +185,7 @@ const useChessState = create(
           _id: localStorage.getItem('_id') as string,
           isWin,
         };
-        const response = await fetch(`${process.env.REACT_APP_DEV_SERVER_URL}/gameResult`, {
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/gameResult`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

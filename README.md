@@ -33,9 +33,17 @@
 - 체스게임
   - 체스 방 생성 or 참여 및 로그인
 
-    ![chess1](https://github.com/ParkBig/minesweeper/assets/105584331/828246f0-a85d-4e30-bc7a-6fa85ab4949c)
+    ![chess1](https://github.com/ParkBig/game-pack/assets/105584331/c6909ebc-6f79-4129-bd97-f58838d77499)
+
+  - 체스 방
+
+    ![chess2](https://github.com/ParkBig/game-pack/assets/105584331/c0c70547-ebea-4770-a74d-f26a4a027085)
 
   - 체스 진행 및 채팅
+
+    ![chess3](https://github.com/ParkBig/game-pack/assets/105584331/fc1c51c7-d213-430b-bb8d-690d4c1bc5a0)
+
+
   - 게임 종료
 
 <br>
